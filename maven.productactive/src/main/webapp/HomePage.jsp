@@ -17,23 +17,23 @@
 			<a class="navbar-brand"> ProductActive </a>
 		</div>
 		<ul class="navbar-nav col-lg-9">
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/HomePage.jsp"
 			class="nav-link">Home</a></li>
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/NotepadPage.jsp"
 			class="nav-link">Note Pad</a></li>
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/DeadlinePage.jsp"
 			class="nav-link">Deadlines</a></li>
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/Activitylogger.jsp"
 			class="nav-link">Activity Logger</a></li>
 		</ul>
 		<ul class="navbar-nav col-lg-9">
-		<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+		<li><a href="<%=request.getContextPath()%>/Register.jsp"
 			class="nav-link">Register</a></li>
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/Login.jsp"
 			class="nav-link">Login</a></li>
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/Account.jsp"
 			class="nav-link">Account</a></li>
-			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			<li><a href="<%=request.getContextPath()%>/HomePage.jsp"
 			class="nav-link">Logout</a></li>
 		</ul>
 	</nav>
