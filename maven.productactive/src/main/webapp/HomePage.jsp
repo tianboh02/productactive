@@ -23,7 +23,7 @@
 			class="nav-link">Note Pad</a></li>
 			<li><a href="<%=request.getContextPath()%>/DeadlinePage.jsp"
 			class="nav-link">Deadlines</a></li>
-			<li><a href="<%=request.getContextPath()%>/Activitylogger.jsp"
+			<li><a href="<%=request.getContextPath()%>/ActivityLoggerPage.jsp"
 			class="nav-link">Activity Logger</a></li>
 		</ul>
 		<ul class="navbar-nav col-lg-9">
