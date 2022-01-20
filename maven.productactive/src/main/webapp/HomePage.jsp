@@ -27,6 +27,10 @@
 			class="nav-link">Activity Logger</a></li>
 		</ul>
 		<ul class="navbar-nav col-lg-9">
+		<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			class="nav-link">Register</a></li>
+			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
+			class="nav-link">Login</a></li>
 			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
 			class="nav-link">Account</a></li>
 			<li><a href="<%=request.getContextPath()%>/UserServlet/dashboard"
