@@ -21,7 +21,7 @@
 			class="nav-link">Home</a></li>
 			<li><a href="<%=request.getContextPath()%>/NotepadPage.jsp"
 			class="nav-link">Note Pad</a></li>
-			<li><a href="<%=request.getContextPath()%>/DeadlinePage.jsp"
+			<li><a href="<%=request.getContextPath()%>/DeadlineServlet"
 			class="nav-link">Deadlines</a></li>
 			<li><a href="<%=request.getContextPath()%>/ActivityLoggerPage.jsp"
 			class="nav-link">Activity Logger</a></li>
