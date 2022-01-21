@@ -10,28 +10,32 @@
 <title>Log new activity</title>
 </head>
 <body>
-<div class="container col-md-5">
-	<form action ="ActivityLoggerServlet" method="post">
-	  <div class="form-group">
-	    <label for="inputActivity">Activity</label>
-	    <input type= "text" name="activity_name" class="form-control" id="activity_name" placeholder="Enter your activity name">
-	  </div>
-	  <div class="form-group">
-	    <label for="inputDescription">Description</label>
-	    <input type= "text" name="activity_description" class="form-control" id="activity_description" placeholder="Enter description">
-	  </div>
-	  <div class="form-group">
-	    <label for="inputStart">Start</label>
-	    <input type= "datetime-local" name="activity_start" class="form-control" id="activity_start" placeholder="Select your starting time">
-	  </div>
-	  <div class="form-group">
-	    <label for="inputEnd">End</label>
-	    <input type= "datetime-local" name="activity_end" class="form-control" id="activity_end" placeholder="Select your ending time">
-	  </div>
-	  <div class="buttonHolder">
-	  	  <input type="submit" class="btn btn-primary" name="submit" value="Log Activity" style="width: 100%;">
-	  </div>
+<div class="container col-md-6">
+	<div class="card">
+	<div class="card-body">
+
+	<form action ="AddActivityLoggerServlet" method="post">
+	<caption>
+	<h2>
+	Add New Log
+	</h2>
+	</caption>
+	<fieldset class="form-group">
+	<label>Activity</label> <input type="text" class="form-control" name="activity_name" id="activity_name" placeholder="Enter your activity name" required="required">
+	</fieldset>
+	<fieldset class="form-group">
+	<label>Description</label> <input type="text" class="form-control" name="activity_description" id="activity_description" placeholder="Enter description" required="required">
+	</fieldset>
+	<fieldset class="form-group">
+	<label>Start</label> <input type="datetime-local" class="form-control" name="activity_start" id="activity_start" required="required">
+	</fieldset>
+	<fieldset class="form-group">
+	<label> End</label> <input type="datetime-local" class="form-control" name="activity_end" id="activity_end" required="required">
+	</fieldset>
+	<input type="submit" class="btn btn-primary" name="submit" value="Log Activity">
 	</form>
+	</div>
+	</div>
 </div>
 
 </body>

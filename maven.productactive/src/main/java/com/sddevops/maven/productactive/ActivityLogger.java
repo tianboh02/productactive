@@ -6,17 +6,17 @@ public class ActivityLogger {
 	private int id;
 	private int userId;
 	private String activityName;
-	private String activityDesription;
+	private String activityDescription;
 	private String startDateTime;
 	private String endDateTime;
 	
-	public ActivityLogger(int id, int userId, String activityName, String activityDesription,
+	public ActivityLogger(int id, int userId, String activityName, String activityDescription,
 			String startDateTime, String endDateTime) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.activityName = activityName;
-		this.activityDesription = activityDesription;
+		this.activityDescription = activityDescription;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}
@@ -39,11 +39,11 @@ public class ActivityLogger {
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
 	}
-	public String getActivityDesription() {
-		return activityDesription;
+	public String getActivityDescription() {
+		return activityDescription;
 	}
-	public void setActivityDesription(String activityDesription) {
-		this.activityDesription = activityDesription;
+	public void setActivityDescription(String activityDesription) {
+		this.activityDescription = activityDesription;
 	}
 	public String getStartDateTime() {
 		return startDateTime;

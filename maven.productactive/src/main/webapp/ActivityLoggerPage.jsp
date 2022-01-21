@@ -40,7 +40,7 @@ information accordingly -->
 <c:out value="${log.activityName}" />
 </td>
 <td>
-<c:out value="${log.activityDesription}" />
+<c:out value="${log.activityDescription}" />
 </td>
 <td>
 <c:out value="${log.startDateTime}" />
@@ -54,7 +54,7 @@ buttons which invokes the edit/delete functions -->
 <a href="edit?id=<c:out value='${log.id}' 
 />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; 
 <a href="delete?id=<c:out 
-value='${user.id}' />">Delete</a>
+value='${log.id}' />">Delete</a>
 </td>
 </tr>
 </c:forEach>

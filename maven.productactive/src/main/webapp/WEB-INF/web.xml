@@ -9,4 +9,16 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<servlet>
+		<servlet-name>ActivityLoggerServlet</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.ActivityLoggerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ActivityLoggerServlet</servlet-name>
+		<url-pattern>/ActivityLoggerServlet/dashboard</url-pattern>
+		<url-pattern>/ActivityLoggerServlet/edit</url-pattern>
+		<url-pattern>/ActivityLoggerServlet/update</url-pattern>
+		<url-pattern>/ActivityLoggerServlet/delete</url-pattern>
+	</servlet-mapping>
 </web-app>
