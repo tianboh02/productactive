@@ -18,7 +18,7 @@
 			<a class="navbar-brand"> ProductActive </a>
 		</div>
 		<ul class="navbar-nav col-lg-9">
-			<li><a href="<%=request.getContextPath()%>/HomePage.jsp"
+			<li><a href="<%=request.getContextPath()%>/HomeServlet"
 			class="nav-link">Home</a></li>
 			<li><a href="<%=request.getContextPath()%>/NotepadPage.jsp"
 			class="nav-link">Note Pad</a></li>
