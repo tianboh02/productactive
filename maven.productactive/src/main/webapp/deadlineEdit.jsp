@@ -47,15 +47,6 @@
 		</ul>
 	</nav>
 </div>
-	<nav class="navbar navbar-expand-md navbar-light">
-		<div>
-			<a class="navbar-brand"> Deadline Management </a>
-		</div>
-		<ul class="navbar-nav">
-			<li><a href="<%=request.getContextPath()%>/DeadlineServlet/dashboard"
-				class="nav-link">Back to Dashboard</a></li>
-		</ul>
-	</nav>
 	<div class="container col-md-6">
 		<div class="card">
 			<div class="card-body">
