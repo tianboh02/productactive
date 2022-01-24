@@ -239,21 +239,20 @@ public class DeadlineServlet extends HttpServlet {
 		response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
 	}
 
-	// method to delete user
-//	private void deleteDeadline(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException {
-//		// Step 1: Retrieve value from the request
-//		String strId = request.getParameter("id");
-//		Integer id = Integer.parseInt(strId);
-//		// Step 2: Attempt connection with database and execute delete user SQL query
-//		try (Connection connection = getConnection();
-//				PreparedStatement statement = connection.prepareStatement(DELETE_DEADLINE_SQL);) {
-//			statement.setLong(1, id);
-//			int i = statement.executeUpdate();
-//		}
-//		// Step 3: redirect back to UserServlet dashboard (note: remember to change the
-//		// url to your project name)
-//		response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
-//	}
+	private void deleteDeadline(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+		// Step 1: Retrieve value from the request
+		String strId = request.getParameter("id");
+		Integer id = Integer.parseInt(strId);
+		// Step 2: Attempt connection with database and execute delete user SQL query
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_DEADLINE_SQL);) {
+			statement.setLong(1, id);
+			int i = statement.executeUpdate();
+		}
+		// Step 3: redirect back to UserServlet dashboard (note: remember to change the
+		// url to your project name)
+		response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
+	}
 
 }
