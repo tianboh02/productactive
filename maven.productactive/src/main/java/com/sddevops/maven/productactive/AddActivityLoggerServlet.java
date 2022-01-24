@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AddActivityLoggerServlet
@@ -44,7 +45,9 @@ public class AddActivityLoggerServlet extends HttpServlet {
 		//Step 1: Initialize a PrintWriter object to return the html values via the response
 		PrintWriter out = response.getWriter();
 		//Step 2: retrieve the four parameters from the request from the web form
-		int userId = 1;
+		HttpSession session = request.getSession(true);
+		String idSession = (String) session.getAttribute("id");
+		int userId = Integer.parseInt(idSession);
 		String n = request.getParameter("activity_name");
 		String d = request.getParameter("activity_description");
 		String s = request.getParameter("activity_start");
