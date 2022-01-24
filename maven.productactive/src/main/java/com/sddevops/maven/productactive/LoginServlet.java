@@ -81,10 +81,11 @@ public class LoginServlet extends HttpServlet {
 				int id = rs.getInt(1);
 				String username = rs.getString(2);
 				HttpSession session = request.getSession(true);
-				session.setAttribute("id", id);
-				RequestDispatcher rd = request.getRequestDispatcher("HomeServlet.java");
-				rd.forward(request, response);
+				session.setAttribute("id", Integer.toString(id));
+				// RequestDispatcher rd = request.getRequestDispatcher("/HomeServlet.java");
+				// rd.forward(request, response);
 				JOptionPane.showMessageDialog(frame, "Welcome back, " + username);
+				response.sendRedirect("http://localhost:8090/maven.productactive/HomeServlet");
 			} 
 			// If user does not exist
 			else {
