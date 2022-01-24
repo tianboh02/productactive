@@ -5,6 +5,10 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +37,16 @@ public class AddActivityLoggerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String action = request.getServletPath();
+		try {
+			switch (action) {
+			default:
+				goAddLogPage(request, response);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -78,8 +92,18 @@ public class AddActivityLoggerServlet extends HttpServlet {
 			System.out.println(exception);
 			out.close();
 		}
-		doGet(request, response);
+		
 		
 	}
+	
+	private void goAddLogPage(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException
+			{
+				HttpSession session = request.getSession(true);
+				String idSession = (String) session.getAttribute("id");
+	
+				request.setAttribute("userid", idSession);
+				request.getRequestDispatcher("/AddActivityLog.jsp").forward(request, response);
+			}
 
 }
