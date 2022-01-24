@@ -1,6 +1,8 @@
 package com.sddevops.maven.productactive;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +31,10 @@ public class DeadlineServlet extends HttpServlet {
 	 private String jdbcUsername = "root";
 	 private String jdbcPassword = "password";
 	 
+	 private static final String CREATE_DEADLINE = "insert into deadlinetable values(?,?,?,?)";
 	 private static final String SELECT_ALL_DEADLINES = "select * from deadlinetable ";
-	 private static final String SELECT_DEADLINE_BY_ID = "select * from deadlinetable where userId =?";
+	 private static final String SELECT_DEADLINE_BY_ID = "select * from deadlinetable where id =?";
+	 private static final String SELECT_DEADLINE_BY_USERID = "select * from deadlinetable where userId =?";
 	 private static final String DELETE_DEADLINE_SQL = "delete from deadlinetable where name = ?;";
 	 private static final String UPDATE_DEADLINE_SQL = "update deadlinetable set id = ?,userId= ?, title =?,deadline =? where id = ?;";
 	 
@@ -65,16 +69,19 @@ public class DeadlineServlet extends HttpServlet {
 		 String action = request.getServletPath();
 		 try {
 		 switch (action) {
-//		 case "/UserServlet/delete":
-//		 deleteDeadline(request, response);
-//		 break;
-//		 case "/UserServlet/edit":
-//		 showEditForm(request, response);
-//		 break;
-//		 case "/UserServlet/update":
-//		 updateDeadline(request, response);
-//		 break;
-		 case "/DeadlineServlet":
+		 case "/DeadlineServlet/delete":
+		 deleteDeadline(request, response);
+		 break;
+		 case "/DeadlineServlet/insert":
+		 doPost(request, response);
+		 break;
+		 case "/DeadlineServlet/edit":
+		 showEditForm(request, response);
+		 break;
+		 case "/DeadlineServlet/update":
+		 updateDeadline(request, response);
+		 break;
+		 case "/DeadlineServlet/dashboard":
 		 listDeadlines(request, response);
 		 break;
 		 }
@@ -88,7 +95,34 @@ public class DeadlineServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		response.setContentType("text/html");
+		
+		PrintWriter out = response.getWriter();
+		
+		String id = request.getParameter("id");
+		String userId = request.getParameter("userId");
+		String title = request.getParameter("title");
+		String deadline = request.getParameter("deadline");
+		
+		try {
+		 Connection connection = getConnection();
+		
+		 PreparedStatement ps = connection.prepareStatement(CREATE_DEADLINE);
+		
+		 ps.setString(1, id);
+		 ps.setString(2, userId);
+		 ps.setString(3, title);
+		 ps.setString(4, deadline);
+		
+		 int i = ps.executeUpdate();
+		
+		}
+		
+		catch (Exception exception) {
+		 System.out.println(exception);
+		 out.close();
+		}
 		doGet(request, response);
 	}
 	
@@ -108,10 +142,10 @@ public class DeadlineServlet extends HttpServlet {
 			 Integer userId = rs.getInt("userId");
 			 String title = rs.getString("title");
 			 String strDeadline = rs.getString("deadline");
-			 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			 
-			 LocalDateTime deadline = LocalDateTime.parse(strDeadline, formatter);
-			 deadlines.add(new Deadline(id,userId, title, deadline));
+//			 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//			 
+//			 LocalDateTime deadline = LocalDateTime.parse(strDeadline, formatter);
+			 deadlines.add(new Deadline(id,userId, title, strDeadline));
 			 }
 			 } catch (SQLException e) {
 			 System.out.println(e.getMessage());
@@ -121,81 +155,82 @@ public class DeadlineServlet extends HttpServlet {
 			request.getRequestDispatcher("/DeadlinePage.jsp").forward(request, response);
 			}
 	
-//	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, ServletException, IOException {
-//			//get parameter passed in the URL
-//			String strId = request.getParameter("id");
-//			var deadlineId = Integer.parseInt(strId);
-//			Deadline existingDeadline = new Deadline(0, 0, "", null);
-//			// Step 1: Establishing a Connection
-//			try (Connection connection = getConnection();
-//			// Step 2:Create a statement using connection object
-//			PreparedStatement preparedStatement =
-//			connection.prepareStatement(SELECT_DEADLINE_BY_ID);) {
-//			preparedStatement.setInt(1, deadlineId);
-//			// Step 3: Execute the query or update query
-//			ResultSet rs = preparedStatement.executeQuery();
-//			// Step 4: Process the ResultSet object
-//			while (rs.next()) {
-//			Integer id = rs.getInt("deadlineId");
-//			Integer userId = rs.getInt("userId");
-//			String title = rs.getString("title");
-//			String strDeadline = rs.getString("deadline");
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+			//get parameter passed in the URL
+			String strId = request.getParameter("id");
+			Integer deadlineId = Integer.parseInt(strId);
+			Deadline existingDeadline = new Deadline(0, 0, "", null);
+			// Step 1: Establishing a Connection
+			try (Connection connection = getConnection();
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement =
+			connection.prepareStatement(SELECT_DEADLINE_BY_ID);) {
+			preparedStatement.setInt(1, deadlineId);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+			Integer id = rs.getInt("id");
+			Integer userId = rs.getInt("userId");
+			String title = rs.getString("title");
+			String strDeadline = rs.getString("deadline");
 //			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
 //			LocalDateTime deadline = LocalDateTime.parse(strDeadline, formatter);
-//			
-//			existingDeadline = new Deadline(id, userId, title, deadline);
-//			}
-//			} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//			}
-//			//Step 5: Set existingUser to request and serve up the userEdit form
-//			request.setAttribute("deadline", existingDeadline);
-//			request.getRequestDispatcher("/deadlineEdit.jsp").forward(request, response);
-//			}
-//	
-//	private void updateDeadline(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException {
-//			//Step 1: Retrieve value from the request
-//			 String strId = request.getParameter("id");
-//			 String strUserId = request.getParameter("userId");
-//			 String title = request.getParameter("title");
-//			 String strDeadline = request.getParameter("deadline");
-//			 
-//			 Integer id = Integer.parseInt(strId);
-//			 Integer userId = Integer.parseInt(strUserId);
-//			 
-////			 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
-////			 LocalDateTime deadline = LocalDateTime.parse(strDeadline, formatter);
-//			 
-//			 //Step 2: Attempt connection with database and execute update user SQL query
-//			 try (Connection connection = getConnection(); PreparedStatement statement =
-//			connection.prepareStatement(UPDATE_DEADLINE_SQL);) {
-//			 statement.setLong(1, id);
-//			 statement.setLong(2, userId);
-//			 statement.setString(3, title);
-//			 statement.setString(4, strDeadline);
-//			 statement.setLong(5, id);
-//			 int i = statement.executeUpdate();
-//			 }
-//			 //Step 3: redirect back to UserServlet (note: remember to change the url to your project name)
-//			 response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
-//			}
-//	
-//	//method to delete user
-//	private void deleteDeadline(HttpServletRequest request, HttpServletResponse response)
-//	throws SQLException, IOException {
-//	//Step 1: Retrieve value from the request
-//	 String strId = request.getParameter("id");
-//	 Integer id = Integer.parseInt(strId);
-//	 //Step 2: Attempt connection with database and execute delete user SQL query
-//	 try (Connection connection = getConnection(); PreparedStatement statement =
-//	connection.prepareStatement(DELETE_DEADLINE_SQL);) {
-//		 statement.setLong(1, id);
-//	 int i = statement.executeUpdate();
-//	 }
-//	 //Step 3: redirect back to UserServlet dashboard (note: remember to change the url to your project name)
-//	 response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
-//	}
+			
+			existingDeadline = new Deadline(id, userId, title, strDeadline);
+			}
+			} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			}
+			//Step 5: Set existingUser to request and serve up the userEdit form
+			request.setAttribute("deadline", existingDeadline);
+			request.getRequestDispatcher("/deadlineEdit.jsp").forward(request, response);
+			}
+	
+	
+	private void updateDeadline(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+			//Step 1: Retrieve value from the request
+			 String strId = request.getParameter("id");
+			 String strUserId = request.getParameter("userId");
+			 String title = request.getParameter("title");
+			 String strDeadline = request.getParameter("deadline");
+			 
+			 Integer id = Integer.parseInt(strId);
+			 Integer userId = Integer.parseInt(strUserId);
+			 
+//			 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+//			 LocalDateTime deadline = LocalDateTime.parse(strDeadline, formatter);
+			 
+			 //Step 2: Attempt connection with database and execute update user SQL query
+			 try (Connection connection = getConnection(); PreparedStatement statement =
+			connection.prepareStatement(UPDATE_DEADLINE_SQL);) {
+			 statement.setLong(1, id);
+			 statement.setLong(2, userId);
+			 statement.setString(3, title);
+			 statement.setString(4, strDeadline);
+			 statement.setLong(5, id);
+			 int i = statement.executeUpdate();
+			 }
+			 //Step 3: redirect back to UserServlet (note: remember to change the url to your project name)
+			 response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
+			}
+	
+	//method to delete user
+	private void deleteDeadline(HttpServletRequest request, HttpServletResponse response)
+	throws SQLException, IOException {
+	//Step 1: Retrieve value from the request
+	 String strId = request.getParameter("id");
+	 Integer id = Integer.parseInt(strId);
+	 //Step 2: Attempt connection with database and execute delete user SQL query
+	 try (Connection connection = getConnection(); PreparedStatement statement =
+	connection.prepareStatement(DELETE_DEADLINE_SQL);) {
+		 statement.setLong(1, id);
+	 int i = statement.executeUpdate();
+	 }
+	 //Step 3: redirect back to UserServlet dashboard (note: remember to change the url to your project name)
+	 response.sendRedirect("http://localhost:8090/maven.productactive/DeadlineServlet/dashboard");
+	}
 
 }

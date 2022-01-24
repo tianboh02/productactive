@@ -5,16 +5,16 @@ import java.time.LocalDateTime;
 public class Deadline {
 
 	private int id;
-	private int userid;
+	private int userId;
 	private String title;
-	private LocalDateTime date;
+	private String deadline;
 	
-	public Deadline(int id, int userid, String title, LocalDateTime date) {
+	public Deadline(int id, int userId, String title, String deadline) {
 		super();
 		this.id = id;
-		this.userid = userid;
+		this.userId = userId;
 		this.title = title;
-		this.date = date;
+		this.deadline = deadline;
 	}
 	
 	public int getId() {
@@ -23,11 +23,11 @@ public class Deadline {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getTitle() {
 		return title;
@@ -35,10 +35,10 @@ public class Deadline {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public LocalDateTime getDate() {
-		return date;
+	public String getDeadline() {
+		return deadline;
 	}
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
 	}
 }

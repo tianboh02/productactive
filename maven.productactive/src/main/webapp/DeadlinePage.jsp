@@ -19,7 +19,7 @@ crossorigin="anonymous">
 <hr>
 <div class="container text-left">
 <!-- Add new user button redirects to the register.jsp page -->
-<a href="<%=request.getContextPath()%>/register.jsp" class="btn btnsuccess">Add New User</a>
+<a href="<%=request.getContextPath()%>/deadlineEdit.jsp" class="btn-btnsuccess">Add New User</a>
 </div>
 <br>
 <!-- Create a table to list out all current users information -->
@@ -41,16 +41,16 @@ information accordingly -->
 <c:out value="${deadline.title}" />
 </td>
 <td>
-<c:out value="${deadline.date}" />
+<c:out value="${deadline.deadline}" />
 </td>
 <td>
 <!-- For each user in the database, Edit/Delete
 buttons which invokes the edit/delete functions -->
 <td>
-<a href="edit?id=<c:out value='${user.name}'
+<a href="edit?id=<c:out value='${deadline.id}'
 />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
 <a href="delete?name=<c:out
-value='${user.name}' />">Delete</a>
+value='${deadline.id}' />">Delete</a>
 </td>
 </tr>
 </c:forEach>
