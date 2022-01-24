@@ -21,4 +21,14 @@
 		<url-pattern>/ActivityLoggerServlet/update</url-pattern>
 		<url-pattern>/ActivityLoggerServlet/delete</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/HomeServlet/logout</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
