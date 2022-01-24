@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,6 +43,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String action = request.getServletPath();
+		try {
+			switch (action) {
+			default:
+				checkUserLoggedIn(request, response);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -86,7 +97,7 @@ public class LoginServlet extends HttpServlet {
 				// rd.forward(request, response);
 				JOptionPane.showMessageDialog(frame, "Welcome back, " + username);
 				response.sendRedirect("http://localhost:8090/maven.productactive/HomeServlet");
-			} 
+			}
 			// If user does not exist
 			else {
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
@@ -97,5 +108,22 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(e);
 		}
 		frame.dispose();
+	}
+
+	// Check if user is logged in
+	private void checkUserLoggedIn(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		// Retrieve the current session. If session does NOT exist, returns NULL
+		HttpSession session = request.getSession(false);
+		String id = (String) session.getAttribute("id");
+		request.setAttribute("userid", id);
+		// If there is a user logged in
+		if (id != null) {
+			request.getRequestDispatcher("/HomeServlet").forward(request, response);
+		}
+		// If no user is logged in, redirect to login
+		else {
+			request.getRequestDispatcher("/Login.jsp").forward(request, response);
+		}
 	}
 }
