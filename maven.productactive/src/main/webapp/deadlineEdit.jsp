@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Deadlines</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>User Management Application</title>
 <link rel="stylesheet"
@@ -19,8 +19,7 @@
 			<a class="navbar-brand"> Deadline Management </a>
 		</div>
 		<ul class="navbar-nav">
-			<li><a
-				href="<%=request.getContextPath()%>/DeadlineServlet"
+			<li><a href="<%=request.getContextPath()%>/DeadlineServlet"
 				class="nav-link">Back to Dashboard</a></li>
 		</ul>
 	</nav>
@@ -36,10 +35,10 @@
 				<caption>
 					<h2>
 						<c:if test="${deadline != null}">
-Edit User
+Edit Deadline
 </c:if>
 						<c:if test="${deadline == null}">
-Add New User
+Add New Deadline
 </c:if>
 					</h2>
 				</caption>
@@ -49,8 +48,7 @@ Add New User
 value='${deadline.id}' />" />
 				</c:if>
 				<c:if test="${deadline == null}">
-					<input type="hidden" name="id"
-						value=null />
+					<input type="hidden" name="id" value=null />
 				</c:if>
 				<c:if test="${deadline != null}">
 					<input type="hidden" name="userId"
@@ -58,8 +56,7 @@ value='${deadline.id}' />" />
 value='${deadline.userId}' />" />
 				</c:if>
 				<c:if test="${deadline == null}">
-					<input type="hidden" name="userId"
-						value=001 />
+					<input type="hidden" name="userId" value=1 />
 				</c:if>
 				<fieldset class="form-group">
 					<label>Title</label> <input type="text"
@@ -67,13 +64,13 @@ value='${deadline.userId}' />" />
 value='${deadline.title}' />" class="form-control"
 						name="title" required="required">
 				</fieldset>
-				
-				
+
+
 				<fieldset class="form-group">
 					<label> Deadline</label> <input type="datetime-local"
 						value="<c:out
-value='${deadline.deadline}' />" class="form-control"
-						name="deadline">
+value='${deadline.deadline}' />"
+						class="form-control" name="deadline">
 				</fieldset>
 				<button type="submit" class="btn btn-success">Save</button>
 				</form>

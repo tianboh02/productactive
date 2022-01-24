@@ -11,6 +11,21 @@
 	</welcome-file-list>
 	
 	<servlet>
+		<servlet-name>DeadlineServlet</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.DeadlineServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeadlineServlet</servlet-name>
+		<url-pattern>/DeadlineServlet/dashboard</url-pattern>
+		<url-pattern>/DeadlineServlet/create</url-pattern>
+		<url-pattern>/DeadlineServlet/insert</url-pattern>
+		<url-pattern>/DeadlineServlet/edit</url-pattern>
+		<url-pattern>/DeadlineServlet/update</url-pattern>
+		<url-pattern>/DeadlineServlet/delete</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ActivityLoggerServlet</servlet-name>
 		<servlet-class>com.sddevops.maven.productactive.ActivityLoggerServlet</servlet-class>
 	</servlet>
