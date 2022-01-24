@@ -21,7 +21,7 @@
 			<li><a href="<%=request.getContextPath()%>/HomeServlet"
 			class="nav-link">Home</a></li>
 			<c:if test="${userid != null}">
-			<li><a href="<%=request.getContextPath()%>/NotepadPage.jsp"
+			<li><a href="<%=request.getContextPath()%>/NotepadManagement/dashboard"
 			class="nav-link">Note Pad</a></li>
 			<li><a href="<%=request.getContextPath()%>/DeadlineServlet"
 			class="nav-link">Deadlines</a></li>
@@ -72,7 +72,7 @@
 		<div class="row">
 			<div class="col-md-6">
             <div class="square-service-block">
-               <a href="<%=request.getContextPath()%>/NotepadPage.jsp">
+               <a href="<%=request.getContextPath()%>/NotepadManagement/dashboard">
                  <h2 class="ssb-title">Note Pad</h2>  
                </a>
             </div>
