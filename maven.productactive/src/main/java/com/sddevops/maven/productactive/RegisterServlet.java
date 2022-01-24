@@ -84,9 +84,7 @@ public class RegisterServlet extends HttpServlet {
 				// successfully
 				// registered” via the response,
 				if (i > 0) {
-					PrintWriter writer = response.getWriter();
-					writer.println("<h1>" + "You have successfully registered for an account!" + "</h1>");
-					writer.close();
+					response.sendRedirect("http://localhost:8090/maven.productactive/Login.jsp");
 				}
 			}
 		}
