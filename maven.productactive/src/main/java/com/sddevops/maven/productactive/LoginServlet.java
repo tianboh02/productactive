@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 		JFrame frame = new JFrame();
 		frame.setAlwaysOnTop(true);
 		frame.setLocation(0, 0);
-		
+
 		// Get parameters from the request from the web form
 		String usernameLogin = request.getParameter("username");
 		String passwordLogin = request.getParameter("password");
@@ -75,17 +75,19 @@ public class LoginServlet extends HttpServlet {
 			checkLoginStatement.setString(1, usernameLogin);
 			checkLoginStatement.setString(2, passwordLogin);
 			ResultSet rs = checkLoginStatement.executeQuery();
+			// If user exists
 			if (rs.next()) {
 				// Assign data retrieved from SQL query
 				int id = rs.getInt(1);
 				String username = rs.getString(2);
-				// HttpSession session = request.getSession(true);
-				// session.setAttribute("username", username);
-				// session.setAttribute("id", id);
-				RequestDispatcher rd = request.getRequestDispatcher("HomePage.jsp");
+				HttpSession session = request.getSession(true);
+				session.setAttribute("id", id);
+				RequestDispatcher rd = request.getRequestDispatcher("HomeServlet.java");
 				rd.forward(request, response);
-				JOptionPane.showMessageDialog(frame, "Welcome back, " + username + " " + id);
-			} else {
+				JOptionPane.showMessageDialog(frame, "Welcome back, " + username);
+			} 
+			// If user does not exist
+			else {
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 				rd.forward(request, response);
 				JOptionPane.showMessageDialog(frame, "Wrong username or password");

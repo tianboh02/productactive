@@ -12,6 +12,7 @@
 <title>Login Page</title>
 </head>
 <body>
+<!-- Change navbar to completed navbar later -->
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<div>
 			<a class="navbar-brand"> ProductActive </a>
