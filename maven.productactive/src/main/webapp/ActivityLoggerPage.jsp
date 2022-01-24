@@ -15,7 +15,7 @@
 <hr>
 <div class="container text-left">
 <!-- Add new user button redirects to the register.jsp page -->
-<a href="<%=request.getContextPath()%>/AddActivityLog.jsp" class="btn btn-success">Log New Activity</a>
+<a href="<%=request.getContextPath()%>/AddActivityLoggerServlet" class="btn btn-success">Log New Activity</a>
 </div>
 <br>
 <!-- Create a table to list out all current users information -->
@@ -43,10 +43,10 @@ information accordingly -->
 <c:out value="${log.activityDescription}" />
 </td>
 <td>
-<c:out value="${log.startDateTime}" />
+<input type="datetime-local" value="<c:out value="${log.startDateTime}" />" readonly="readonly">
 </td>
 <td>
-<c:out value="${log.endDateTime}" />
+<input type="datetime-local" value="<c:out value="${log.endDateTime}" />" readonly="readonly">
 </td>
 <!-- For each user in the database, Edit/Delete 
 buttons which invokes the edit/delete functions -->
