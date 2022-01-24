@@ -47,16 +47,10 @@ Add New Deadline
 						value="<c:out
 value='${deadline.id}' />" />
 				</c:if>
-				<c:if test="${deadline == null}">
-					<input type="hidden" name="id" value=null />
-				</c:if>
 				<c:if test="${deadline != null}">
 					<input type="hidden" name="userId"
 						value="<c:out
 value='${deadline.userId}' />" />
-				</c:if>
-				<c:if test="${deadline == null}">
-					<input type="hidden" name="userId" value=1 />
 				</c:if>
 				<fieldset class="form-group">
 					<label>Title</label> <input type="text"
