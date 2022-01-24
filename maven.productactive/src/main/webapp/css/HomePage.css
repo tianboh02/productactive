@@ -1,14 +1,72 @@
 @charset "ISO-8859-1";
 
 .container-home{
-	border: solid;
-	margin-top: 20px;
+	margin-top: 30px;
 }
 
-.abu{
-	color: blue;
+.home-intro1{
+	font-size: 18px;
+	text-align: center;
 }
 
-.abu1{
-	color: #00ff00;
+.home-intro2{
+	font-size: 25px;
+	text-align: center;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: auto;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: arial;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #0080ff;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+
+a:hover, a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+.square-service-block{
+	position:relative;
+	overflow:hidden;
+	margin:15px auto;
+	}
+.square-service-block a {
+  background-color: #e74c3c;
+  border-radius: 5px;
+  display: block;
+  padding: 60px 20px;
+  text-align: center;
+  width: 100%;
+}
+.square-service-block a:hover{
+  background-color: rgba(231, 76, 60, 0.8);
+  border-radius: 5px;
+}
+
+h2.ssb-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 200;
+  margin:0;
+  padding:0;
+  text-transform: uppercase;
 }
