@@ -20,26 +20,33 @@
 		<ul class="navbar-nav col-lg-9">
 			<li><a href="<%=request.getContextPath()%>/HomeServlet"
 			class="nav-link">Home</a></li>
+			<c:if test="${userid != null}">
 			<li><a href="<%=request.getContextPath()%>/NotepadPage.jsp"
 			class="nav-link">Note Pad</a></li>
 			<li><a href="<%=request.getContextPath()%>/DeadlineServlet"
 			class="nav-link">Deadlines</a></li>
 			<li><a href="<%=request.getContextPath()%>/ActivityLoggerServlet/dashboard"
 			class="nav-link">Activity Logger</a></li>
+			</c:if>
 		</ul>
 		<ul class="navbar-nav col-lg-9">
-		<li><a href="<%=request.getContextPath()%>/Register.jsp"
+			<c:if test="${userid == null}">
+			<li><a href="<%=request.getContextPath()%>/Register.jsp"
 			class="nav-link">Register</a></li>
 			<li><a href="<%=request.getContextPath()%>/Login.jsp"
 			class="nav-link">Login</a></li>
+			</c:if>
+			<c:if test="${userid != null}">
 			<li><a href="<%=request.getContextPath()%>/Account.jsp"
 			class="nav-link">Account</a></li>
 			<li><a href="<%=request.getContextPath()%>/HomePage.jsp"
 			class="nav-link">Logout</a></li>
+			</c:if>
 		</ul>
 	</nav>
 </div>
 	
+<c:if test="${userid == null}">
 <div class="container col-md-8">
 	<div class="container-home">
 		<p class="home-intro1"> Have you heard of ProductActive? ProductActive is a productivity website that helps students or working adults keep track of time better. As this is still a developmental website, many more features will be coming your way!</p>
@@ -57,7 +64,9 @@
 		
 	</div>
 </div>
+</c:if>
 
+<c:if test="${userid != null}">
 <div class="container col-md-5">
 	<div class="container-home">
 		<div class="row">
@@ -95,6 +104,7 @@
 		</div>
 	</div>
 </div>
+</c:if>
 
 </body>
 </html>

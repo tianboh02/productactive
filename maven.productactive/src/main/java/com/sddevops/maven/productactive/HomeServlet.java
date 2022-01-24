@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class HomeServlet
@@ -86,6 +87,9 @@ public class HomeServlet extends HttpServlet {
 	private void setUserHome(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException
 			{
+				HttpSession session = request.getSession(true);
+				String id = (String) session.getAttribute("id");
+				request.setAttribute("userid", id);
 				request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
 			}
 
