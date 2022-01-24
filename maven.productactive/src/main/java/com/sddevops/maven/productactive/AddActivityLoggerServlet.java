@@ -5,12 +5,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AddActivityLoggerServlet
@@ -32,6 +37,16 @@ public class AddActivityLoggerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String action = request.getServletPath();
+		try {
+			switch (action) {
+			default:
+				goAddLogPage(request, response);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,7 +59,9 @@ public class AddActivityLoggerServlet extends HttpServlet {
 		//Step 1: Initialize a PrintWriter object to return the html values via the response
 		PrintWriter out = response.getWriter();
 		//Step 2: retrieve the four parameters from the request from the web form
-		int userId = 1;
+		HttpSession session = request.getSession(true);
+		String idSession = (String) session.getAttribute("id");
+		int userId = Integer.parseInt(idSession);
 		String n = request.getParameter("activity_name");
 		String d = request.getParameter("activity_description");
 		String s = request.getParameter("activity_start");
@@ -75,8 +92,18 @@ public class AddActivityLoggerServlet extends HttpServlet {
 			System.out.println(exception);
 			out.close();
 		}
-		doGet(request, response);
+		
 		
 	}
+	
+	private void goAddLogPage(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException
+			{
+				HttpSession session = request.getSession(true);
+				String idSession = (String) session.getAttribute("id");
+	
+				request.setAttribute("userid", idSession);
+				request.getRequestDispatcher("/AddActivityLog.jsp").forward(request, response);
+			}
 
 }

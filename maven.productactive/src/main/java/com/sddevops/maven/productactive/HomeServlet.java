@@ -66,6 +66,9 @@ public class HomeServlet extends HttpServlet {
 		String action = request.getServletPath();
 		try {
 			switch (action) {
+			case "/HomeServlet/logout":
+				logoutUser(request, response);
+				break;
 			default:
 				setUserHome(request, response);
 				break;
@@ -91,6 +94,14 @@ public class HomeServlet extends HttpServlet {
 				String id = (String) session.getAttribute("id");
 				request.setAttribute("userid", id);
 				request.getRequestDispatcher("/HomePage.jsp").forward(request, response);
+			}
+
+	private void logoutUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException
+			{
+				HttpSession session = request.getSession(true);
+				session.removeAttribute("id");
+				request.getRequestDispatcher("/HomeServlet").forward(request, response);
 			}
 
 }
