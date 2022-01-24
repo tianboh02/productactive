@@ -23,7 +23,7 @@
 			<c:if test="${userid != null}">
 			<li><a href="<%=request.getContextPath()%>/NotepadManagement/dashboard"
 			class="nav-link">Note Pad</a></li>
-			<li><a href="<%=request.getContextPath()%>/DeadlineServlet"
+			<li><a href="<%=request.getContextPath()%>/DeadlineServlet/dashboard"
 			class="nav-link">Deadlines</a></li>
 			<li><a href="<%=request.getContextPath()%>/ActivityLoggerServlet/dashboard"
 			class="nav-link">Activity Logger</a></li>
@@ -80,7 +80,7 @@
           
           <div class="col-md-6">
             <div class="square-service-block">
-               <a href="<%=request.getContextPath()%>/DeadlineServlet">
+               <a href="<%=request.getContextPath()%>/DeadlineServlet/dashboard">
                  <h2 class="ssb-title">Deadlines</h2>  
                </a>
             </div>
