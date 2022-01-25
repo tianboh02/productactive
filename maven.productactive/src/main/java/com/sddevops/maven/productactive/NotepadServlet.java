@@ -37,7 +37,16 @@ public class NotepadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String action = request.getServletPath();
+		try {
+			switch (action) {
+			default:
+				checkuserid(request, response);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -95,7 +104,14 @@ public class NotepadServlet extends HttpServlet {
 			out.close();
 		}
 		
-		doGet(request, response);
 	}
 
+	private void checkuserid(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException
+			{
+				HttpSession session = request.getSession(true);
+				String id = (String) session.getAttribute("id");
+				request.setAttribute("userid", id);
+				request.getRequestDispatcher("/NotepadPage.jsp").forward(request, response);
+			}
 }

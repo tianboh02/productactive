@@ -15,7 +15,7 @@
 			<hr>
 			<div class="container text-left">
 				<!-- Add new user button redirects to the register.jsp page -->
-				<a href="<%=request.getContextPath()%>/NotepadPage.jsp" class="btn btn-success">Add New Note</a>
+				<a href="<%=request.getContextPath()%>/NotepadServlet" class="btn btn-success">Add New Note</a>
 			</div>
 			<br>
 			<!-- Create a table to list out all current users information -->

@@ -114,13 +114,14 @@ public class NotepadManagement extends HttpServlet {
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 			}
-		
+		request.setAttribute("userid", sessionid);
 		request.setAttribute("listNotes", notes);
 		request.getRequestDispatcher("/NoteView.jsp").forward(request, response);
 	}
 
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		
+		HttpSession session = request.getSession(true);
+		String sessionid = (String) session.getAttribute("id");
 		int id = Integer.parseInt(request.getParameter("id"));
 		Notes existingNote = new Notes(0, 0, "", "");
 		
@@ -140,7 +141,7 @@ public class NotepadManagement extends HttpServlet {
 			} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			}
-			
+			request.setAttribute("userid", sessionid);
 			request.setAttribute("note", existingNote);
 			request.getRequestDispatcher("/NoteEdit.jsp").forward(request, response);
 	}
