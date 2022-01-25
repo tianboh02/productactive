@@ -9,6 +9,39 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+	<nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<div>
+			<a class="navbar-brand"> ProductActive </a>
+		</div>
+		<ul class="navbar-nav col-lg-9">
+			<li><a href="<%=request.getContextPath()%>/HomeServlet"
+			class="nav-link">Home</a></li>
+			<c:if test="${userid != null}">
+			<li><a href="<%=request.getContextPath()%>/NotepadManagement/dashboard"
+			class="nav-link">Note Pad</a></li>
+			<li><a href="<%=request.getContextPath()%>/DeadlineServlet/dashboard"
+			class="nav-link">Deadlines</a></li>
+			<li><a href="<%=request.getContextPath()%>/ActivityLoggerServlet/dashboard"
+			class="nav-link">Activity Logger</a></li>
+			</c:if>
+		</ul>
+		<ul class="navbar-nav col-lg-9">
+			<c:if test="${userid == null}">
+			<li><a href="<%=request.getContextPath()%>/RegisterServlet"
+			class="nav-link">Register</a></li>
+			<li><a href="<%=request.getContextPath()%>/LoginServlet"
+			class="nav-link">Login</a></li>
+			</c:if>
+			<c:if test="${userid != null}">
+			<li><a href="<%=request.getContextPath()%>/Account.jsp"
+			class="nav-link">Account</a></li>
+			<li><a href="<%=request.getContextPath()%>/HomeServlet/logout"
+			class="nav-link">Logout</a></li>
+			</c:if>
+		</ul>
+	</nav>
+</div>
 	<div>
 		<form action="NotepadServlet" method="post">
 			Title: <input type="text" name="title" size="20"></input><br>
