@@ -23,7 +23,7 @@
 			<c:if test="${userid != null}">
 			<li><a href="<%=request.getContextPath()%>/NotepadManagement/dashboard"
 			class="nav-link">Note Pad</a></li>
-			<li><a href="<%=request.getContextPath()%>/DeadlineServlet"
+			<li><a href="<%=request.getContextPath()%>/DeadlineServlet/dashboard"
 			class="nav-link">Deadlines</a></li>
 			<li><a href="<%=request.getContextPath()%>/ActivityLoggerServlet/dashboard"
 			class="nav-link">Activity Logger</a></li>
@@ -31,15 +31,15 @@
 		</ul>
 		<ul class="navbar-nav col-lg-9">
 			<c:if test="${userid == null}">
-			<li><a href="<%=request.getContextPath()%>/Register.jsp"
+			<li><a href="<%=request.getContextPath()%>/RegisterServlet"
 			class="nav-link">Register</a></li>
-			<li><a href="<%=request.getContextPath()%>/Login.jsp"
+			<li><a href="<%=request.getContextPath()%>/LoginServlet"
 			class="nav-link">Login</a></li>
 			</c:if>
 			<c:if test="${userid != null}">
 			<li><a href="<%=request.getContextPath()%>/Account.jsp"
 			class="nav-link">Account</a></li>
-			<li><a href="<%=request.getContextPath()%>/HomePage.jsp"
+			<li><a href="<%=request.getContextPath()%>/HomeServlet/logout"
 			class="nav-link">Logout</a></li>
 			</c:if>
 		</ul>
@@ -54,12 +54,12 @@
 		
 		<div class="card">
 		  <img src="https://content.thriveglobal.com/wp-content/uploads/2019/09/The-True-Secret-to-Increasing-Your-Productivity.jpeg?w=1550" alt="Denim Jeans" style="width:100%">
-		  <p><button>Register now</button></p>
+		  <p><a href="<%=request.getContextPath()%>/RegisterServlet" class="button btn btn-primary">Register now</a></p>
 		</div>
 		
 		<div class="card">
 		  <img src="https://wallpaperaccess.com/full/3734602.jpg" alt="Denim Jeans" style="width:100%">
-		  <p><button>Login</button></p>
+		  <p><a href="<%=request.getContextPath()%>/LoginServlet" class="button btn btn-primary">Login</a></p>
 		</div>
 		
 	</div>
@@ -80,7 +80,7 @@
           
           <div class="col-md-6">
             <div class="square-service-block">
-               <a href="<%=request.getContextPath()%>/DeadlineServlet">
+               <a href="<%=request.getContextPath()%>/DeadlineServlet/dashboard">
                  <h2 class="ssb-title">Deadlines</h2>  
                </a>
             </div>

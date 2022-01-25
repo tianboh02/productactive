@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ActivityLoggerServlet
@@ -102,9 +103,13 @@ public class ActivityLoggerServlet extends HttpServlet {
 	throws SQLException, IOException, ServletException
 	{
 		List <ActivityLogger> logs = new ArrayList <>();
+		HttpSession session = request.getSession(true);
+		String idSession = (String) session.getAttribute("id");
 		try (Connection connection = getConnection();
 		// Step 5.1: Create a statement using connection object
-		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LOG);) {
+		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOG_BY_USERID);) {
+		preparedStatement.setInt(1, Integer.parseInt(idSession));
+
 		// Step 5.2: Execute the query or update query
 		ResultSet rs = preparedStatement.executeQuery();
 		// Step 5.3: Process the ResultSet object.
@@ -121,6 +126,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 			System.out.println(e.getMessage());
 		}
 		// Step 5.4: Set the users list into the listUsers attribute to be pass to the userManagement.jsp
+		request.setAttribute("userid", idSession);
 		request.setAttribute("listActivityLog", logs);
 		request.getRequestDispatcher("/ActivityLoggerPage.jsp").forward(request, response);
 	}
@@ -130,8 +136,10 @@ public class ActivityLoggerServlet extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 	throws SQLException, ServletException, IOException {
 	//get parameter passed in the URL
+	HttpSession session = request.getSession(true);
+	String idSession = (String) session.getAttribute("id");
 	int id = Integer.parseInt(request.getParameter("id"));
-	ActivityLogger existingLog = new ActivityLogger(id, 1, "", "", "", "");
+	ActivityLogger existingLog = new ActivityLogger(id, Integer.parseInt(idSession), "", "", "", "");
 	// Step 1: Establishing a Connection
 	try (Connection connection = getConnection();
 	// Step 2:Create a statement using connection object
@@ -153,6 +161,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 		System.out.println(e.getMessage());
 	}
 	//Step 5: Set existingUser to request and serve up the userEdit form
+	request.setAttribute("userid", idSession);
 	request.setAttribute("activityLog", existingLog);
 	request.getRequestDispatcher("/EditActivityLog.jsp").forward(request, response);
 	}

@@ -3,13 +3,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <meta charset="ISO-8859-1">
-<title>Activity Logger Dashboard</title>
+<title>Deadlines</title>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+crossorigin="anonymous">
 </head>
 <body>
-
 <div>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<div>
@@ -43,53 +46,44 @@
 		</ul>
 	</nav>
 </div>
-
-<div class="row"> 
+<div class="row">
 <div class="container">
-<h3 class="text-center">Activity Log</h3>
+<h3 class="text-center">Deadlines</h3>
 <hr>
 <div class="container text-left">
 <!-- Add new user button redirects to the register.jsp page -->
-<a href="<%=request.getContextPath()%>/AddActivityLoggerServlet" class="btn btn-success">Log New Activity</a>
+<a href="create" class="btn btn-success">Add New Deadlines</a> &nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <br>
 <!-- Create a table to list out all current users information -->
 <table class="table">
 <thead>
 <tr>
-<th>Activity</th>
-<th>Description</th>
-<th>Start</th>
-<th>End</th>
-<th>Actions</th>
+<th>Title</th>
+<th>Deadline</th>
 </tr>
 </thead>
-<!-- Pass in the list of users receive via the Servlet’s response to a loop 
+<!-- Pass in the list of users receive via the Servlet’s response to a loop
 -->
 <tbody>
-<c:forEach var="log" items="${listActivityLog}">
-<!-- For each user in the database, display their 
+<c:forEach var="deadline" items="${listDeadlines}">
+<!-- For each user in the database, display their
 information accordingly -->
 <tr>
 <td>
-<c:out value="${log.activityName}" />
+<c:out value="${deadline.title}" />
 </td>
 <td>
-<c:out value="${log.activityDescription}" />
+<c:out value="${deadline.deadline}" />
 </td>
 <td>
-<input type="datetime-local" value="<c:out value="${log.startDateTime}" />" readonly="readonly">
-</td>
-<td>
-<input type="datetime-local" value="<c:out value="${log.endDateTime}" />" readonly="readonly">
-</td>
-<!-- For each user in the database, Edit/Delete 
+<!-- For each user in the database, Edit/Delete
 buttons which invokes the edit/delete functions -->
 <td>
-<a href="edit?id=<c:out value='${log.id}' 
-/>">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; 
-<a href="delete?id=<c:out 
-value='${log.id}' />">Delete</a>
+<a href="edit?id=<c:out value='${deadline.id}'
+/>">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+<a href="delete?id=<c:out
+value='${deadline.id}' />">Delete</a>
 </td>
 </tr>
 </c:forEach>
