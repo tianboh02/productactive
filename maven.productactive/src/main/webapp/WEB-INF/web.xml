@@ -11,6 +11,21 @@
 	</welcome-file-list>
 	
 	<servlet>
+		<servlet-name>DeadlineServlet</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.DeadlineServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeadlineServlet</servlet-name>
+		<url-pattern>/DeadlineServlet/dashboard</url-pattern>
+		<url-pattern>/DeadlineServlet/create</url-pattern>
+		<url-pattern>/DeadlineServlet/insert</url-pattern>
+		<url-pattern>/DeadlineServlet/edit</url-pattern>
+		<url-pattern>/DeadlineServlet/update</url-pattern>
+		<url-pattern>/DeadlineServlet/delete</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ActivityLoggerServlet</servlet-name>
 		<servlet-class>com.sddevops.maven.productactive.ActivityLoggerServlet</servlet-class>
 	</servlet>
@@ -20,6 +35,15 @@
 		<url-pattern>/ActivityLoggerServlet/edit</url-pattern>
 		<url-pattern>/ActivityLoggerServlet/update</url-pattern>
 		<url-pattern>/ActivityLoggerServlet/delete</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.HomeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/HomeServlet/logout</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -33,4 +57,5 @@
 		<url-pattern>/NotepadManagement/update</url-pattern>
 		<url-pattern>/NotepadManagement/delete</url-pattern>
 	</servlet-mapping>
+	
 </web-app>
