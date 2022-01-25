@@ -58,4 +58,16 @@
 		<url-pattern>/NotepadManagement/delete</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>AccountServlet</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.AccountServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AccountServlet</servlet-name>
+		<url-pattern>/AccountServlet/userPage</url-pattern>
+		<url-pattern>/AccountServlet/edit</url-pattern>
+		<url-pattern>/AccountServlet/update</url-pattern>
+		<url-pattern>/AccountServlet/delete</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
