@@ -46,4 +46,16 @@
 		<url-pattern>/HomeServlet/logout</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>NotepadManagement</servlet-name>
+		<servlet-class>com.sddevops.maven.productactive.NotepadManagement</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NotepadManagement</servlet-name>
+		<url-pattern>/NotepadManagement/dashboard</url-pattern>
+		<url-pattern>/NotepadManagement/edit</url-pattern>
+		<url-pattern>/NotepadManagement/update</url-pattern>
+		<url-pattern>/NotepadManagement/delete</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
