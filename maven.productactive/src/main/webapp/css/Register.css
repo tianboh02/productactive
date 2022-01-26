@@ -1,0 +1,48 @@
+@charset "ISO-8859-1";
+
+.boxOutline {
+	border-style: solid;
+	border-color: blue;
+	max-width: 800px;
+	margin: auto;
+	margin-top: 50px;
+	height: 420px;
+}
+
+.headerTitle {
+	position: relative;
+	margin-top: 400px;
+	left: 115px;
+	max-width: 500px;
+	margin: auto;
+}
+
+.formBody {
+	position: relative;
+	left: 30px;
+	margin-top: 100px;
+	max-width: 500px;
+	margin: auto;
+}
+
+.container-home {
+	margin-top: 30px;
+}
+
+.registerButtonContainer {
+	max-width: 500px;
+	margin: auto;
+}
+
+.registerButton {
+	position: relative;
+	left: -35px;
+	display: block;
+	width: 100%;
+	border: none;
+	background-color: #04AA6D;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+}
