@@ -1,0 +1,44 @@
+@charset "ISO-8859-1";
+
+.boxOutline {
+	border-style: solid;
+	border-color: green;
+	max-width: 800px;
+	margin: auto;
+	margin-top: 50px;
+	height: 350px;
+}
+
+.headerTitle {
+	position: relative;
+	margin-top: 400px;
+	left: 135px;
+	max-width: 500px;
+	margin: auto;
+}
+
+.formBody {
+	margin-top: 100px;
+	max-width: 500px;
+	margin: auto;
+}
+
+.container-home {
+	margin-top: 30px;
+}
+
+.loginButtonContainer {
+	max-width: 500px;
+	margin: auto;
+}
+
+.loginButton {
+	display: block;
+	width: 100%;
+	border: none;
+	background-color: #04AA6D;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+}

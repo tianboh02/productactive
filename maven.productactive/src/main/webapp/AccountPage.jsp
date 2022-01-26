@@ -8,6 +8,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Account.css"
+	crossorigin="anonymous">
 <meta charset="ISO-8859-1">
 <title>Account Page</title>
 </head>
@@ -49,11 +52,29 @@
 			</ul>
 		</nav>
 	</div>
-	<c:forEach var="userDetails" items="${userDetails}">
-		<a class="btn btn-success"
-			href="edit?id=<c:out value='${userDetails.id}' />">Edit User</a>&nbsp;&nbsp; <br><br>
-		<a class="btn btn-danger"
-			href="delete?id=<c:out value='${userDetails.id}' />">Delete User</a>
-	</c:forEach>
+
+	<div class="headerTitle">
+		<div class="container-home">
+			<h1>Account Page</h1>
+		</div>
+
+		<div class="accountButtonContainer">
+			<div class="container-home">
+				<div class="buttonContainer">
+					<c:forEach var="userDetails" items="${userDetails}">
+						<a class="updateButton"
+							href="edit?id=<c:out value='${userDetails.id}' />">Edit User</a>&nbsp;&nbsp;
+					</c:forEach>
+					<br> <br>
+				</div>
+				<div class="buttonContainer">
+					<c:forEach var="userDetails" items="${userDetails}">
+						<a class="deleteButton"
+							href="delete?id=<c:out value='${userDetails.id}' />">Delete
+							User</a>
+					</c:forEach>
+				</div>
+			</div>
+		</div>
 </body>
 </html>

@@ -9,6 +9,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Login.css"
+	crossorigin="anonymous">
 <title>Login Page</title>
 </head>
 <body>
@@ -48,14 +51,28 @@
 			</ul>
 		</nav>
 	</div>
-	<!-- Create a form with the action attribute to specific where to send the form-data when 
-the form is submitted, method attribute to specific the method used (GET, POST, PUT, DELETE, 
-Etc.) -->
-	<form action="LoginServlet" method="post">
-		Enter Username: <input type="text" name="username" size="32" required="required"></input><br>
-		Enter Password: <input type="password" name="password" size="32" required="required"></input><br>
-		<!-- Implement submit button with type = submit to perform the request when clicked -->
-		<input type="submit" value="Login" />
-	</form>
+	<div class="boxOutline">
+		<div class="headerTitle">
+			<div class="container-home">
+				<h1>Login Page</h1>
+			</div>
+		</div>
+
+		<div class="formBody">
+			<div class="container-home">
+				<!-- Create a form with the action attribute to specific where to send the form-data when  the form is submitted, method attribute to specific the method used (GET, POST, PUT, DELETE,  Etc.) -->
+				<form action="LoginServlet" method="post">
+					Enter Username: <input type="text" name="username" size="32"
+						required="required"></input><br> <br> Enter Password: <input
+						type="password" name="password" size="32" required="required"></input><br>
+					<br>
+					<!-- Implement submit button with type = submit to perform the request when clicked -->
+					<div class="loginButtonContainer">
+						<input type="submit" class="loginButton" value="Login" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

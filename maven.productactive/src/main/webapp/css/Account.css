@@ -1,0 +1,70 @@
+@charset "ISO-8859-1";
+
+.accountButtonContainer {
+	margin-top: 100px;
+	max-width: 500px;
+	margin: auto;
+}
+
+.headerTitle {
+	position: relative;
+	margin-top: 400px;
+	left: 115px;
+	max-width: 500px;
+	margin: auto;
+}
+
+.container-home {
+	margin-top: 30px;
+}
+
+.buttonContainer {
+	max-width: 500px;
+	margin: auto;
+}
+
+.updateButton {
+	position: relative;
+	left: -125px;
+	display: block;
+	width: 100%;
+	border: none;
+	background-color: #04AA6D;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.deleteButton {
+	position: relative;
+	left: -125px;
+	display: block;
+	width: 100%;
+	border: none;
+	background-color: #FF2D00;
+	padding: 14px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+}
+
+/* unvisited link */
+a:link {
+	color: black;
+}
+
+/* visited link */
+a:visited {
+	color: black;
+}
+
+/* mouse over link */
+a:hover {
+	color: black;
+}
+
+/* selected link */
+a:active {
+	color: black;
+}

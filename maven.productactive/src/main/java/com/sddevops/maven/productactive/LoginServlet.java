@@ -113,8 +113,7 @@ public class LoginServlet extends HttpServlet {
 	// Check if user is logged in
 	private void checkUserLoggedIn(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		// Retrieve the current session. If session does NOT exist, returns NULL
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		String id = (String) session.getAttribute("id");
 		request.setAttribute("userid", id);
 		// If there is a user logged in
