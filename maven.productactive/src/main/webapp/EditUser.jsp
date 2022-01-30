@@ -69,8 +69,7 @@
 					<fieldset class="form-group">
 						<label>Password</label> <input type="password"
 							value="<c:out value='${currentUser.password}' />"
-							class="form-control" name="password"
-							required="required">
+							class="form-control" name="password" required="required">
 					</fieldset>
 					<fieldset class="form-group">
 						<label>First Name</label> <input type="text"
@@ -82,7 +81,8 @@
 							value="<c:out value='${currentUser.lastName}' />"
 							class="form-control" name="lastName" required="required">
 					</fieldset>
-					<button type="submit" class="btn btn-success">Update User Information</button>
+					<button type="submit" class="btn btn-success">Update User
+						Information</button>
 				</form>
 			</div>
 		</div>
