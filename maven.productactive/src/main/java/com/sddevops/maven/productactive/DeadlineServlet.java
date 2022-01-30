@@ -15,9 +15,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 
@@ -124,11 +127,9 @@ public class DeadlineServlet extends HttpServlet {
 				Integer id = rs.getInt("id");
 				Integer userId = rs.getInt("userId");
 				String title = rs.getString("title");
-				String strDeadline = rs.getString("deadline");
-//			 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//			 
-//			 LocalDateTime deadline = LocalDateTime.parse(strDeadline, formatter);
-				deadlines.add(new Deadline(id, userId, title, strDeadline));
+				String deadline = rs.getString("deadline");
+
+				deadlines.add(new Deadline(id, userId, title, deadline));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

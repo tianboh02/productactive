@@ -11,6 +11,9 @@
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 crossorigin="anonymous">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Deadline.css"
+	crossorigin="anonymous">
 </head>
 <body>
 <div>
@@ -38,7 +41,7 @@ crossorigin="anonymous">
 			class="nav-link">Login</a></li>
 			</c:if>
 			<c:if test="${userid != null}">
-			<li><a href="<%=request.getContextPath()%>/Account.jsp"
+			<li><a href="<%=request.getContextPath()%>/AccountServlet/userPage"
 			class="nav-link">Account</a></li>
 			<li><a href="<%=request.getContextPath()%>/HomeServlet/logout"
 			class="nav-link">Logout</a></li>
@@ -70,11 +73,11 @@ crossorigin="anonymous">
 <!-- For each user in the database, display their
 information accordingly -->
 <tr>
-<td>
+<td class = "title">
 <c:out value="${deadline.title}" />
 </td>
 <td>
-<c:out value="${deadline.deadline}" />
+<input type="datetime-local" class="deadline" value="<c:out value="${deadline.deadline}" />" readonly="readonly">
 </td>
 <td>
 <!-- For each user in the database, Edit/Delete
