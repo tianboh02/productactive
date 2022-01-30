@@ -38,7 +38,7 @@ crossorigin="anonymous">
 			class="nav-link">Login</a></li>
 			</c:if>
 			<c:if test="${userid != null}">
-			<li><a href="<%=request.getContextPath()%>/Account.jsp"
+			<li><a href="<%=request.getContextPath()%>/AccountServlet/userPage"
 			class="nav-link">Account</a></li>
 			<li><a href="<%=request.getContextPath()%>/HomeServlet/logout"
 			class="nav-link">Logout</a></li>
