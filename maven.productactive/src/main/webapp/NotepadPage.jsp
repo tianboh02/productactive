@@ -34,7 +34,7 @@
 			class="nav-link">Login</a></li>
 			</c:if>
 			<c:if test="${userid != null}">
-			<li><a href="<%=request.getContextPath()%>/Account.jsp"
+			<li><a href="<%=request.getContextPath()%>/AccountServlet/userPage"
 			class="nav-link">Account</a></li>
 			<li><a href="<%=request.getContextPath()%>/HomeServlet/logout"
 			class="nav-link">Logout</a></li>
@@ -42,13 +42,36 @@
 		</ul>
 	</nav>
 </div>
-	<div>
-		<form action="NotepadServlet" method="post">
-			Title: <input type="text" name="title" size="20"></input><br>
-			Content: <input type="text" name="content" size="20"></input><br>
-			<!-- Implement submit button with type = submit to perform the request when clicked -->
-			<input type="submit" value="Add Notes" />
-		</form>	
+	<div class="container col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<c:if test="${note != null}">
+					<form action="update" method="post">
+				</c:if>
+				<c:if test="${note == null}">
+					<form action="NotepadServlet" method="post">
+				</c:if>
+				<caption>
+					<h2>
+						<c:if test="${note != null}">
+							Edit Note
+						</c:if>
+						<c:if test="${note == null}">
+							Add New Note
+						</c:if>
+					</h2>
+				</caption>
+				<fieldset class="form-group">
+					<label>Note Title</label> <input type="text" class="form-control" name="title">
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Note Content</label> <input type="text" class="form-control" name="content">
+				</fieldset>
+				
+				<button type="submit" class="btn btn-success">Add New Note</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
