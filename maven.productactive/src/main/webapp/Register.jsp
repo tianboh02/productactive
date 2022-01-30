@@ -42,9 +42,10 @@
 						class="nav-link">Login</a></li>
 				</c:if>
 				<c:if test="${userid != null}">
-					<li><a href="<%=request.getContextPath()%>/Account.jsp"
+					<li><a
+						href="<%=request.getContextPath()%>/AccountServlet/userPage"
 						class="nav-link">Account</a></li>
-					<li><a href="<%=request.getContextPath()%>/HomePage.jsp"
+					<li><a href="<%=request.getContextPath()%>/HomeServlet/logout"
 						class="nav-link">Logout</a></li>
 				</c:if>
 			</ul>
@@ -65,9 +66,9 @@ Etc.) -->
 				<form action="RegisterServlet" method="post">
 					Username: <input type="text" name="username" size="32"></input><br>
 					<br> Password: <input type="password" name="password"
-						size="32"></input><br>
-					<br> First Name: <input type="text" name="firstName" size="32"></input><br>
-					<br> Last Name: <input type="text" name="lastName" size="32"></input><br>
+						size="32"></input><br> <br> First Name: <input
+						type="text" name="firstName" size="32"></input><br> <br>
+					Last Name: <input type="text" name="lastName" size="32"></input><br>
 					<br>
 					<!-- Implement submit button with type = submit to perform the request when clicked -->
 					<div class="registerButtonContainer">
