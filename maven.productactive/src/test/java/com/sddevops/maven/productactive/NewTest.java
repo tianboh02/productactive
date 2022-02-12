@@ -17,9 +17,9 @@ public class NewTest {
 		// nagivate the browser to this url
 		driver.get ("https://www.rp.edu.sg/discover/");
 		// browser look for link with text value "Why RP?"
-		driver.findElement(By.linkText ("Why RP?")) .click();
+		driver.findElement(By.partialLinkText ("Why RP?")) .click();
 		// browser look for link with text value "Experience Real-World Learning"
-		driver.findElement (By.linkText ("Experience Real-World Learning")) .click();
+		driver.findElement (By.partialLinkText ("Experience Real-World Learning")) .click();
   }
   @BeforeTest
   public void beforeTest() {
