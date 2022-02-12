@@ -82,7 +82,6 @@ public class AddActivityLoggerServlet extends HttpServlet {
 			ps.setString(5, e);
 			//Step 6: perform the query on the database using the prepared statement
 			int i = ps.executeUpdate();
-			//Step 7: check if the query had been successfully execute, return “You are successfully registered” via the response,
 			if (i > 0){
 				response.sendRedirect("http://localhost:8090/maven.productactive/ActivityLoggerServlet/dashboard");
 			}
