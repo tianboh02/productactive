@@ -60,20 +60,17 @@ public class NotepadServlet extends HttpServlet {
 		String sessionid = (String) session.getAttribute("id");
 		
 		response.setContentType("text/html");
-		//Step 1: Initialize a PrintWriter object to return the html values via the response
+		
 		PrintWriter out = response.getWriter(); 
 		
-		//Step 2: retrieve the four parameters from the request from the web form
 		String t = request.getParameter("title");
 		String c = request.getParameter("content");
 		
-		//Step 3: attempt connection to database using JDBC, you can change the username and password accordingly using the phpMyAdmin > User Account dashboard
 		try {
 			int id = 1;
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/productactive", "root", "password");
 			
-			//Step 4: implement the sql query using prepared statement (https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)
 			PreparedStatement userIDAIStatement = con.prepareStatement("select max(id) from notetable");
 			ResultSet rs = userIDAIStatement.executeQuery();
 			
@@ -82,23 +79,19 @@ public class NotepadServlet extends HttpServlet {
 					id++;
 				PreparedStatement ps = con.prepareStatement("insert into NOTETABLE values(?,?,?,?)");
 				
-				//Step 5: parse in the data retrieved from the web form request into the prepared statement accordingly
 				int u = Integer.parseInt(sessionid);
 				ps.setLong(1, id);
 				ps.setLong(2, u);
 				ps.setString(3, t);
 				ps.setString(4, c);
 				
-				//Step 6: perform the query on the database using the prepared statement
 				int i = ps.executeUpdate();
 				
-				//Step 7: check if the query had been successfully execute, return “You are successfully registered” via the response,
 				if (i > 0){
 					response.sendRedirect("http://localhost:8090/maven.productactive/NotepadManagement/dashboard");
 				}
 			}
 		}
-		//Step 8: catch and print out any exception
 		catch (Exception exception) {
 			System.out.println(exception);
 			out.close();
