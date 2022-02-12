@@ -3,6 +3,7 @@ package com.sddevops.maven.productactive;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -14,6 +15,10 @@ public class NewTest {
 		System. setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
 		// define the drive instance
 		WebDriver driver = new ChromeDriver();
+		
+		Dimension d = new Dimension(1382,744); 
+		//Resize the current window to the given dimension
+		driver.manage().window().setSize(d); 
 		// nagivate the browser to this url
 		driver.get ("https://www.rp.edu.sg/discover/");
 		// browser look for link with text value "Why RP?"
