@@ -203,7 +203,7 @@ public class DeadlineServlet extends HttpServlet {
 		}
 		// Step 3: redirect back to UserServlet (note: remember to change the url to
 		// your project name)
-		response.sendRedirect("/DeadlineServlet/dashboard");
+		response.sendRedirect("/maven.productactive/DeadlineServlet/dashboard");
 	}
 
 	private void showCreateForm(HttpServletRequest request, HttpServletResponse response)
@@ -237,7 +237,7 @@ public class DeadlineServlet extends HttpServlet {
 		}
 		// Step 3: redirect back to UserServlet (note: remember to change the url to
 		// your project name)
-		response.sendRedirect("/DeadlineServlet/dashboard");
+		response.sendRedirect("/maven.productactive/DeadlineServlet/dashboard");
 	}
 
 	private void deleteDeadline(HttpServletRequest request, HttpServletResponse response)
@@ -253,7 +253,7 @@ public class DeadlineServlet extends HttpServlet {
 		}
 		// Step 3: redirect back to UserServlet dashboard (note: remember to change the
 		// url to your project name)
-		response.sendRedirect("/DeadlineServlet/dashboard");
+		response.sendRedirect("/maven.productactive/DeadlineServlet/dashboard");
 	}
 
 }
