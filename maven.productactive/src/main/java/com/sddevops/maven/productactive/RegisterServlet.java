@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 /**
  * Servlet implementation class RegisterServlet
  */
@@ -60,9 +57,6 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html"); // If not set, everything will be in plaintext
-		JFrame frame = new JFrame();
-		frame.setAlwaysOnTop(true);
-		frame.setLocation(0, 0);
 		// Step 1: Initialize a PrintWriter object to return the HTML values via the
 		PrintWriter out = response.getWriter();
 
@@ -102,7 +96,6 @@ public class RegisterServlet extends HttpServlet {
 				int i = ps.executeUpdate();
 				if (i > 0) {
 					response.sendRedirect("/maven.productactive/LoginServlet");
-					JOptionPane.showMessageDialog(frame, "Account successfully registered!");
 				}
 			}
 		}
