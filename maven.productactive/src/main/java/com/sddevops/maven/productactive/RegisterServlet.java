@@ -101,7 +101,7 @@ public class RegisterServlet extends HttpServlet {
 				// Step 6: perform the query on the database using the prepared statement
 				int i = ps.executeUpdate();
 				if (i > 0) {
-					response.sendRedirect("/Login.jsp");
+					response.sendRedirect("/maven.productactive/LoginServlet");
 					JOptionPane.showMessageDialog(frame, "Account successfully registered!");
 				}
 			}
