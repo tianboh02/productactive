@@ -83,7 +83,7 @@ public class AddActivityLoggerServlet extends HttpServlet {
 			//Step 6: perform the query on the database using the prepared statement
 			int i = ps.executeUpdate();
 			if (i > 0){
-				response.sendRedirect("/ActivityLoggerServlet/dashboard");
+				response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
 			}
 		}
 		//Step 8: catch and print out any exception
