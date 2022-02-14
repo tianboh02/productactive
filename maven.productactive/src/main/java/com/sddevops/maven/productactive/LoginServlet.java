@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
-import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  * Servlet implementation class LoginServlet
@@ -67,9 +63,6 @@ public class LoginServlet extends HttpServlet {
 		// Initialize a PrintWriter object to return the HTML values via the
 		// PrintWriter out = response.getWriter();
 		// Initialize JFrame for showing message box
-		JFrame frame = new JFrame();
-		frame.setAlwaysOnTop(true);
-		frame.setLocation(0, 0);
 
 		// Get parameters from the request from the web form
 		String usernameLogin = request.getParameter("username");
@@ -95,19 +88,16 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("id", Integer.toString(id));
 				// RequestDispatcher rd = request.getRequestDispatcher("/HomeServlet.java");
 				// rd.forward(request, response);
-				JOptionPane.showMessageDialog(frame, "Welcome back, " + username);
 				response.sendRedirect("/maven.productactive/HomeServlet");
 			}
 			// If user does not exist
 			else {
 				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
 				rd.forward(request, response);
-				JOptionPane.showMessageDialog(frame, "Wrong username or password");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		frame.dispose();
 	}
 
 	// Check if user is logged in
