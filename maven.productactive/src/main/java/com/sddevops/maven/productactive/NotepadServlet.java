@@ -88,7 +88,7 @@ public class NotepadServlet extends HttpServlet {
 				int i = ps.executeUpdate();
 				
 				if (i > 0){
-					response.sendRedirect("/NotepadManagement/dashboard");
+					response.sendRedirect("/maven.productactive/NotepadManagement/dashboard");
 				}
 			}
 		}
