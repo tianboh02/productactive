@@ -187,7 +187,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 		int i = statement.executeUpdate();
 	}
 	//Step 3: redirect back to UserServlet (note: remember to change the url to your project name)
-	response.sendRedirect("/ActivityLoggerServlet/dashboard");
+	response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
 	}
 	
 	
@@ -202,7 +202,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 		int i = statement.executeUpdate();
 	}
 	//Step 3: redirect back to UserServlet dashboard (note: remember to change the url to your project name)
-	response.sendRedirect("/ActivityLoggerServlet/dashboard");
+	response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
 	}
 
 }
