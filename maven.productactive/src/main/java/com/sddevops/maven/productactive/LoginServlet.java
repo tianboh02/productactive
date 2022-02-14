@@ -96,7 +96,7 @@ public class LoginServlet extends HttpServlet {
 				// RequestDispatcher rd = request.getRequestDispatcher("/HomeServlet.java");
 				// rd.forward(request, response);
 				JOptionPane.showMessageDialog(frame, "Welcome back, " + username);
-				response.sendRedirect("http://localhost:8090/maven.productactive/HomeServlet");
+				response.sendRedirect("/HomeServlet");
 			}
 			// If user does not exist
 			else {
