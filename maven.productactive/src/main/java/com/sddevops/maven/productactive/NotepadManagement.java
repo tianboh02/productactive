@@ -162,7 +162,7 @@ public class NotepadManagement extends HttpServlet {
 			statement.setInt(5, oriId);
 			int i = statement.executeUpdate();
 		}
-		response.sendRedirect("http://localhost:8090/maven.productactive/NotepadManagement/dashboard");
+		response.sendRedirect("/NotepadManagement/dashboard");
 	}
 	
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -171,6 +171,6 @@ public class NotepadManagement extends HttpServlet {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
 		}
-		response.sendRedirect("http://localhost:8090/maven.productactive/NotepadManagement/dashboard");
+		response.sendRedirect("/NotepadManagement/dashboard");
 	}
 }
