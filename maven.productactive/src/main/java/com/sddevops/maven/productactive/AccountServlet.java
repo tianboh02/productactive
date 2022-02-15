@@ -178,7 +178,7 @@ public class AccountServlet extends HttpServlet {
 		}
 		// Step 3: redirect back to UserServlet (note: remember to change the url to
 		// your project name)
-		response.sendRedirect("http://localhost:8090/maven.productactive/AccountServlet/userPage");
+		response.sendRedirect("/maven.productactive/AccountServlet/userPage");
 	}
 
 	// Method to delete user
@@ -196,7 +196,7 @@ public class AccountServlet extends HttpServlet {
 		session.removeAttribute("userid");
 		session.removeAttribute("userDetails");
 		session.removeAttribute("id");
-		response.sendRedirect("http://localhost:8090/maven.productactive/HomePage.jsp");
+		response.sendRedirect("/maven.productactive/HomePage.jsp");
 	}
 
 }
