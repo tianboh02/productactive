@@ -20,15 +20,10 @@ public class ActivityLoggerSeleniumTest {
 	
 	//routes
 	String home = "http://localhost:8080/maven.productactive/HomeServlet";
-	String login = "http://localhost:8080/maven.productactive/LoginServlet";
-	String dashboard = "http://localhost:8080/maven.productactive/ActivityLoggerServlet/dashboard";
-	String addLog = "http://localhost:8080/maven.productactive/AddActivityLoggerServlet";
-	String editLog;
-	
 	
 
   @Test (priority = 0)
-  public void logDashboard() {
+  public void LogDashboard() {
 		// define the chrome driver
 		System. setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
 		// define the drive instance
@@ -52,7 +47,7 @@ public class ActivityLoggerSeleniumTest {
   }
   
   @Test (priority = 1)
-  public void logAdd() {
+  public void LogAdd() {
 	  // define the chrome driver
 	  System. setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
 	  // define the drive instance
@@ -90,7 +85,7 @@ public class ActivityLoggerSeleniumTest {
   }
   
   @Test (priority = 2)
-  public void logEdit() {
+  public void LogEdit() {
 	// define the chrome driver
 		  System. setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
 		  // define the drive instance
@@ -133,7 +128,7 @@ public class ActivityLoggerSeleniumTest {
   }
   
   @Test (priority = 3)
-  public void logDelete() {
+  public void LogDelete() {
 	// define the chrome driver
 	  System. setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
 	  // define the drive instance
