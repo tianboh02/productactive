@@ -101,7 +101,7 @@ public class HomeServlet extends HttpServlet {
 			{
 				HttpSession session = request.getSession(true);
 				session.removeAttribute("id");
-				request.getRequestDispatcher("/HomeServlet").forward(request, response);
+				response.sendRedirect("/maven.productactive/HomeServlet");
 			}
 
 }
