@@ -67,29 +67,11 @@ public class AddActivityLoggerServlet extends HttpServlet {
 		String s = request.getParameter("activity_start");
 		String e = request.getParameter("activity_end");
 		
-		//Step 3: attempt connection to database using JDBC, you can change the username and password accordingly using the phpMyAdmin > User Account dashboard
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
-			"jdbc:mysql://localhost:3306/productactive", "root", "password");
-			//Step 4: implement the sql query using prepared statement (https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)
-			PreparedStatement ps = con.prepareStatement("insert into activityloggertable(userId, activityName, activityDescription, startDateTime, endDateTime) values(?,?,?,?,?)");
-			//Step 5: parse in the data retrieved from the web form request into the prepared statement accordingly
-			ps.setInt(1, userId);
-			ps.setString(2, n);
-			ps.setString(3, d);
-			ps.setString(4, s);
-			ps.setString(5, e);
-			//Step 6: perform the query on the database using the prepared statement
-			int i = ps.executeUpdate();
-			if (i > 0){
-				response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
-			}
-		}
-		//Step 8: catch and print out any exception
-		catch (Exception exception) {
-			System.out.println(exception);
-			out.close();
+		
+		int i = Integer.parseInt(ActivityLogger.addActivityLog(userId, n, d , s ,e));
+		
+		if (i > 0){
+			response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
 		}
 		
 		

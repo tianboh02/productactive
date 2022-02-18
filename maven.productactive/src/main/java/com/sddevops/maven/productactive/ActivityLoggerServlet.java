@@ -102,29 +102,11 @@ public class ActivityLoggerServlet extends HttpServlet {
 	private void listUsers(HttpServletRequest request, HttpServletResponse response)
 	throws SQLException, IOException, ServletException
 	{
-		List <ActivityLogger> logs = new ArrayList <>();
 		HttpSession session = request.getSession(true);
 		String idSession = (String) session.getAttribute("id");
-		try (Connection connection = getConnection();
-		// Step 5.1: Create a statement using connection object
-		PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOG_BY_USERID);) {
-		preparedStatement.setInt(1, Integer.parseInt(idSession));
+		
+		List <ActivityLogger> logs = ActivityLogger.getActivityLogByUserid(Integer.parseInt(idSession));
 
-		// Step 5.2: Execute the query or update query
-		ResultSet rs = preparedStatement.executeQuery();
-		// Step 5.3: Process the ResultSet object.
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				int userId = rs.getInt("userId");
-				String activityName = rs.getString("activityName");
-				String activityDescription = rs.getString("activityDescription");
-				String startDateTime = rs.getString("startDateTime");
-				String endDateTime = rs.getString("endDateTime");
-				logs.add(new ActivityLogger(id, userId, activityName, activityDescription, startDateTime, endDateTime));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
 		// Step 5.4: Set the users list into the listUsers attribute to be pass to the userManagement.jsp
 		request.setAttribute("userid", idSession);
 		request.setAttribute("listActivityLog", logs);
@@ -139,27 +121,10 @@ public class ActivityLoggerServlet extends HttpServlet {
 	HttpSession session = request.getSession(true);
 	String idSession = (String) session.getAttribute("id");
 	int id = Integer.parseInt(request.getParameter("id"));
-	ActivityLogger existingLog = new ActivityLogger(id, Integer.parseInt(idSession), "", "", "", "");
-	// Step 1: Establishing a Connection
-	try (Connection connection = getConnection();
-	// Step 2:Create a statement using connection object
-	PreparedStatement preparedStatement = connection.prepareStatement(SELECT_LOG_BY_ID);) {
-		preparedStatement.setInt(1, id);
-		// Step 3: Execute the query or update query
-		ResultSet rs = preparedStatement.executeQuery();
-		// Step 4: Process the ResultSet object
-		while (rs.next()) {
-		id = rs.getInt("id");
-		int userId = rs.getInt("userId");
-		String activityName = rs.getString("activityName");
-		String activityDescription = rs.getString("activityDescription");
-		String startDateTime = rs.getString("startDateTime");
-		String endDateTime = rs.getString("endDateTime");
-		existingLog = new ActivityLogger(id, userId, activityName, activityDescription, startDateTime, endDateTime);
-		}
-	} catch (SQLException e) {
-		System.out.println(e.getMessage());
-	}
+	
+	ActivityLogger existingLog = ActivityLogger.getActivityLogByid(id,Integer.parseInt(idSession));
+	
+	
 	//Step 5: Set existingUser to request and serve up the userEdit form
 	request.setAttribute("userid", idSession);
 	request.setAttribute("activityLog", existingLog);
@@ -176,16 +141,9 @@ public class ActivityLoggerServlet extends HttpServlet {
 	String activityDescription = request.getParameter("activityDescription");
 	String startDateTime = request.getParameter("startDateTime");
 	String endDateTime = request.getParameter("endDateTime");
-	//Step 2: Attempt connection with database and execute update user SQL query
-	try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_LOG_SQL);) {
-		statement.setInt(1, oriUserId);
-		statement.setString(2, activityName);
-		statement.setString(3, activityDescription);
-		statement.setString(4, startDateTime);
-		statement.setString(5, endDateTime);
-		statement.setInt(6, oriId);
-		int i = statement.executeUpdate();
-	}
+	
+	ActivityLogger.editActivityLog(oriId,oriUserId,activityName,activityDescription,startDateTime,endDateTime);
+	
 	//Step 3: redirect back to UserServlet (note: remember to change the url to your project name)
 	response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
 	}
@@ -197,10 +155,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 	//Step 1: Retrieve value from the request
 	int id = Integer.parseInt(request.getParameter("id"));
 	//Step 2: Attempt connection with database and execute delete user SQL query
-	try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_LOG_SQL);) {
-		statement.setInt(1, id);
-		int i = statement.executeUpdate();
-	}
+	ActivityLogger.deleteActivityLog(id);
 	//Step 3: redirect back to UserServlet dashboard (note: remember to change the url to your project name)
 	response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");
 	}
