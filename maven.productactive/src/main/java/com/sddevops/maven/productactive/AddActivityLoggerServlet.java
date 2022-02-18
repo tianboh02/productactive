@@ -60,7 +60,7 @@ public class AddActivityLoggerServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//Step 2: retrieve the four parameters from the request from the web form
 		HttpSession session = request.getSession(true);
-		String idSession = (String) session.getAttribute("id");
+		String idSession = ActivityLogger.getUserId(session);
 		int userId = Integer.parseInt(idSession);
 		String n = request.getParameter("activity_name");
 		String d = request.getParameter("activity_description");

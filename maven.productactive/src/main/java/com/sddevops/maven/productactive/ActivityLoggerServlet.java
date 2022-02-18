@@ -103,7 +103,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 	throws SQLException, IOException, ServletException
 	{
 		HttpSession session = request.getSession(true);
-		String idSession = (String) session.getAttribute("id");
+		String idSession = ActivityLogger.getUserId(session);
 		
 		List <ActivityLogger> logs = ActivityLogger.getActivityLogByUserid(Integer.parseInt(idSession));
 
@@ -119,7 +119,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 	throws SQLException, ServletException, IOException {
 	//get parameter passed in the URL
 	HttpSession session = request.getSession(true);
-	String idSession = (String) session.getAttribute("id");
+	String idSession = ActivityLogger.getUserId(session);
 	int id = Integer.parseInt(request.getParameter("id"));
 	
 	ActivityLogger existingLog = ActivityLogger.getActivityLogByid(id,Integer.parseInt(idSession));

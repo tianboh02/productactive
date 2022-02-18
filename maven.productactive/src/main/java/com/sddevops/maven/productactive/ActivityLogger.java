@@ -93,6 +93,16 @@ public class ActivityLogger {
 		return connection;
 	}
 	
+	public static String getUserId(HttpSession session) {
+		String idSession = (String) session.getAttribute("id");
+		
+		if(idSession.isEmpty() || idSession.equals("")) {
+			return null;
+		}
+		
+		return idSession;
+	}
+	
 	public static List<ActivityLogger> getActivityLogByUserid(int userid) {
 		List <ActivityLogger> logs = new ArrayList <>();
 		
