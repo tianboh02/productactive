@@ -60,7 +60,7 @@ public class AddActivityLoggerServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		//Step 2: retrieve the four parameters from the request from the web form
 		HttpSession session = request.getSession(true);
-		String idSession = ActivityLogger.getUserId(session);
+		String idSession = ActivityLogger.getSessionUserId(session);
 		int userId = Integer.parseInt(idSession);
 		String n = request.getParameter("activity_name");
 		String d = request.getParameter("activity_description");
@@ -68,7 +68,7 @@ public class AddActivityLoggerServlet extends HttpServlet {
 		String e = request.getParameter("activity_end");
 		
 		
-		int i = Integer.parseInt(ActivityLogger.addActivityLog(userId, n, d , s ,e));
+		int i = ActivityLogger.addActivityLog(userId, n, d, s, e);
 		
 		if (i > 0){
 			response.sendRedirect("/maven.productactive/ActivityLoggerServlet/dashboard");

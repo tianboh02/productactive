@@ -93,12 +93,8 @@ public class ActivityLogger {
 		return connection;
 	}
 	
-	public static String getUserId(HttpSession session) {
+	public static String getSessionUserId(HttpSession session) {
 		String idSession = (String) session.getAttribute("id");
-		
-		if(idSession.isEmpty() || idSession.equals("")) {
-			return null;
-		}
 		
 		return idSession;
 	}
@@ -129,7 +125,7 @@ public class ActivityLogger {
 		return logs;
 	}
 	
-	public static ActivityLogger getActivityLogByid(int logid, int userid) {
+	public static ActivityLogger getActivityLogByid(int logid) {
 		ActivityLogger existingLog = new ActivityLogger(logid, 0 , "", "", "", "");
 		// Step 1: Establishing a Connection
 		try (Connection connection = getConnection();
@@ -154,7 +150,7 @@ public class ActivityLogger {
 		return existingLog;
 	}
 	
-	public static String addActivityLog(int userid, String name, String description, String start, String end) {
+	public static int addActivityLog(int userid, String name, String description, String start, String end) {
 
 		String n = name;
 		String d = description;
@@ -171,23 +167,25 @@ public class ActivityLogger {
 			ps.setString(5, e);
 			//Step 6: perform the query on the database using the prepared statement
 			i = ps.executeUpdate();
-			return Integer.toString(i);
+			return i;
 
 		}
 		catch (Exception exception) {
 			System.out.println(exception);
 		}
-		return null;
+		return i;
 				
 	}
 	
-	public static ActivityLogger editActivityLog(int id, int userid, String name, String description, String start, String end) {
+	public static int editActivityLog(int id, int userid, String name, String description, String start, String end) {
 		int oriId = id;
 		int oriUserId = userid;
 		String activityName = name;
 		String activityDescription = description;
 		String startDateTime = start;
 		String endDateTime = end;
+		
+		int i = 0;
 		//Step 2: Attempt connection with database and execute update user SQL query
 		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_LOG_SQL);) {
 			statement.setInt(1, oriUserId);
@@ -196,26 +194,32 @@ public class ActivityLogger {
 			statement.setString(4, startDateTime);
 			statement.setString(5, endDateTime);
 			statement.setInt(6, oriId);
-			int i = statement.executeUpdate();
+			i = statement.executeUpdate();
+			
+			return i;
 		}
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return null;
+		return i;
 	}
 	
-	public static ActivityLogger deleteActivityLog(int logid) {
+	public static int deleteActivityLog(int logid) {
 		//Step 1: Retrieve value from the request
 		int id = logid;
+		int i = 0;
 		//Step 2: Attempt connection with database and execute delete user SQL query
 		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_LOG_SQL);) {
 			statement.setInt(1, id);
-			int i = statement.executeUpdate();
+			i = statement.executeUpdate();
+			System.out.println("int i: "+ Integer.toString(i));
+
+			return i;
 		}
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-		return null;
+		return i;
 	}
 
 	
