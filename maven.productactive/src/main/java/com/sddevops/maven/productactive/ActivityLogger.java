@@ -212,7 +212,6 @@ public class ActivityLogger {
 		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_LOG_SQL);) {
 			statement.setInt(1, id);
 			i = statement.executeUpdate();
-			System.out.println("int i: "+ Integer.toString(i));
 
 			return i;
 		}
