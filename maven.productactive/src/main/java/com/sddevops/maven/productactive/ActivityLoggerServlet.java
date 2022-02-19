@@ -103,7 +103,7 @@ public class ActivityLoggerServlet extends HttpServlet {
 	throws SQLException, IOException, ServletException
 	{
 		HttpSession session = request.getSession(true);
-		String idSession = (String) session.getAttribute("id");
+		String idSession = ActivityLogger.getSessionUserId(session);
 		
 		List <ActivityLogger> logs = ActivityLogger.getActivityLogByUserid(Integer.parseInt(idSession));
 
@@ -119,10 +119,10 @@ public class ActivityLoggerServlet extends HttpServlet {
 	throws SQLException, ServletException, IOException {
 	//get parameter passed in the URL
 	HttpSession session = request.getSession(true);
-	String idSession = (String) session.getAttribute("id");
+	String idSession = ActivityLogger.getSessionUserId(session);
 	int id = Integer.parseInt(request.getParameter("id"));
 	
-	ActivityLogger existingLog = ActivityLogger.getActivityLogByid(id,Integer.parseInt(idSession));
+	ActivityLogger existingLog = ActivityLogger.getActivityLogByid(id);
 	
 	
 	//Step 5: Set existingUser to request and serve up the userEdit form
