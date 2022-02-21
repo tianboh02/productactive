@@ -43,14 +43,14 @@ public class DeadlineSeleniumTest {
 	  
 	  driver.findElement(By.name("title")).sendKeys("DevOps");
 
-	  WebElement dateBox = driver.findElement(By.xpath("//*[@id=\"deadline\"]"));
+	  WebElement dateBox = driver.findElement(By.xpath("//*[@name=\"deadline\"]"));
 
 	  dateBox.sendKeys("11112022");
 	  dateBox.sendKeys(Keys.TAB);
 	  dateBox.sendKeys("1159PM");
 
 
-	  driver.findElement(By.className("Save")).click();
+	  driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
 	  driver.quit();
 
   }
@@ -79,7 +79,7 @@ public class DeadlineSeleniumTest {
 		  
 		  WebElement title = driver.findElement(By.name("title"));
 		 
-		  WebElement dateBox = driver.findElement(By.xpath("//input[@name='deadline']"));
+		  WebElement dateBox = driver.findElement(By.xpath("//*[@name=\"deadline\"]"));
 		  
 		  title.clear();
 		  
@@ -88,7 +88,7 @@ public class DeadlineSeleniumTest {
 		  dateBox.sendKeys(Keys.TAB);
 		  dateBox.sendKeys("0900PM");
 		  
-		  driver.findElement(By.className("Save")).click();
+		  driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
 		  
 		  driver.quit();
 
