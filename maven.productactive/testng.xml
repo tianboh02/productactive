@@ -3,7 +3,9 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="com.sddevops.maven.productactive.NewTest"/>
+      <class name="com.sddevops.maven.productactive.ActivityLoggerSeleniumTest"/>
+      <class name="com.sddevops.maven.productactive.ActivityLoggerJUnitTest"/>
+      <class name="com.sddevops.maven.productactive.HomePageSeleniumTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
