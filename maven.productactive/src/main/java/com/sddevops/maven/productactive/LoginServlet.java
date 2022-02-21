@@ -68,20 +68,11 @@ public class LoginServlet extends HttpServlet {
 		String usernameLogin = request.getParameter("username");
 		String passwordLogin = request.getParameter("password");
 
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productactive", "root",
-					"password");
-			// Implement the SQL query using prepared statement
-			PreparedStatement checkLoginStatement = con
-					.prepareStatement("select * from usertable where username=? and password=?");
-			// Set the value for the SQL query
-			checkLoginStatement.setString(1, usernameLogin);
-			checkLoginStatement.setString(2, passwordLogin);
-			ResultSet rs = checkLoginStatement.executeQuery();
-			// If user exists
-			if (rs.next()) {
-				// Assign data retrieved from SQL query
+		ResultSet rs = User.loginUser(usernameLogin, passwordLogin);
+
+		if (rs != null) {
+			// Assign data retrieved from SQL query
+			try {
 				int id = rs.getInt(1);
 				String username = rs.getString(2);
 				HttpSession session = request.getSession(true);
@@ -89,14 +80,14 @@ public class LoginServlet extends HttpServlet {
 				// RequestDispatcher rd = request.getRequestDispatcher("/HomeServlet.java");
 				// rd.forward(request, response);
 				response.sendRedirect("/maven.productactive/HomeServlet");
+			} catch (Exception exception) {
+				System.out.println(exception);
 			}
-			// If user does not exist
-			else {
-				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-				rd.forward(request, response);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
+		}
+		// If user does not exist
+		else {
+			RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
+			rd.forward(request, response);
 		}
 	}
 

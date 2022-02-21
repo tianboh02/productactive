@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.util.Comparator;
 import java.util.Objects;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
+
 public class User {
 	private int id;
 	private String username;
@@ -100,6 +103,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	// Register user
 	public static int registerUser(String username, String password, String firstName, String lastName) {
 		int i = 0;
 		try {
@@ -107,8 +111,6 @@ public class User {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productactive", "root",
 					"password");
-			// Step 4: implement the sql query using prepared statement
-			// (https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)
 			PreparedStatement userIDAIStatement = con.prepareStatement("select max(id) from usertable");
 			ResultSet rs = userIDAIStatement.executeQuery();
 
@@ -117,22 +119,40 @@ public class User {
 				id++;
 
 				PreparedStatement ps = con.prepareStatement("insert into usertable values(?,?,?,?,?)");
-				// Step 5: parse in the data retrieved from the web form request into the
-				// prepared statement
-				// accordingly
 				ps.setLong(1, id);
 				ps.setString(2, username);
 				ps.setString(3, password);
 				ps.setString(4, firstName);
 				ps.setString(5, lastName);
-				// Step 6: perform the query on the database using the prepared statement
 				i = ps.executeUpdate();
 			}
 		}
-		// Step 8: catch and print out any exception
 		catch (Exception exception) {
 			System.out.println(exception);
 		}
 		return i;
+	}
+	
+	// Login User
+	public static ResultSet loginUser(String usernameLogin, String passwordLogin) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productactive", "root",
+					"password");
+			// Implement the SQL query using prepared statement
+			PreparedStatement checkLoginStatement = con
+					.prepareStatement("select * from usertable where username=? and password=?");
+			// Set the value for the SQL query
+			checkLoginStatement.setString(1, usernameLogin);
+			checkLoginStatement.setString(2, passwordLogin);
+			ResultSet rs = checkLoginStatement.executeQuery();
+			if (rs.next()) {
+				return rs;
+			}
+		}
+		catch (Exception exception) {
+			System.out.println(exception);
+		}
+		return null;
 	}
 }
