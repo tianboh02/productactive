@@ -115,4 +115,37 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		}
 	}
+
+	// Login function for JUnit test
+	public boolean loginFunction(String username, String password) throws ServletException, IOException {
+		// Assign parameters
+		String uLogin = username;
+		String pLogin = password;
+
+		// Database connection
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productactive", "root",
+					"password");
+			// Implement the SQL query using prepared statement
+			PreparedStatement checkLoginStatement = con
+					.prepareStatement("select * from usertable where username=? and password=?");
+			// Set the value for the SQL query
+			checkLoginStatement.setString(1, uLogin);
+			checkLoginStatement.setString(2, pLogin);
+			ResultSet rs = checkLoginStatement.executeQuery();
+			// If user exists
+			if (rs.next()) {
+				return true;
+			}
+			// If user does not exist
+			else {
+				return false;
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
 }

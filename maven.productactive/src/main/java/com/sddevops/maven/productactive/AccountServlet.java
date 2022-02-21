@@ -199,4 +199,32 @@ public class AccountServlet extends HttpServlet {
 		response.sendRedirect("/maven.productactive/HomePage.jsp");
 	}
 
+	// Update function for JUnit test
+	public User updateFunction(int id, String username, String password, String firstName, String lastName)
+			throws SQLException, IOException {
+		// Step 2: Attempt connection with database and execute update user SQL query
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL);) {
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.setString(3, firstName);
+			statement.setString(4, lastName);
+			statement.setInt(5, id);
+			int i = statement.executeUpdate();
+		}
+		return null;
+
+	}
+
+	// Delete function for JUnit test
+	public User deleteFunction(int id) throws SQLException, IOException {
+		// Attempt connection with database and execute delete user SQL query
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_USER_SQL);) {
+			statement.setInt(1, id);
+			int i = statement.executeUpdate();
+		}
+		return null;
+	}
+
 }
