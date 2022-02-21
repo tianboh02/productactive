@@ -21,7 +21,7 @@ public class NotesTest {
 	
 	driver.get ("http://localhost:8080/maven.productactive/HomeServlet");
 	
-	driver.findElement(By.linkText ("Login")) .click();
+	driver.findElement(By.linkText("Login")).click();
 	Thread.sleep(2000);
 
 	driver.findElement(By.name("username")).sendKeys("a");
