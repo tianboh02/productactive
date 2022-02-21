@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
@@ -103,6 +106,26 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	// FOR SEPARATING THE FUNCTIONS
+
+	// Connection
+	public static String jdbcURL = "jdbc:mysql://localhost:3306/productactive";
+	public static String jdbcUsername = "root";
+	public static String jdbcPassword = "password";
+
+	protected static Connection getConnection() {
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return connection;
+	}
+
 	// Register user
 	public static int registerUser(String username, String password, String firstName, String lastName) {
 		int i = 0;
@@ -126,13 +149,12 @@ public class User {
 				ps.setString(5, lastName);
 				i = ps.executeUpdate();
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			System.out.println(exception);
 		}
 		return i;
 	}
-	
+
 	// Login User
 	public static ResultSet loginUser(String usernameLogin, String passwordLogin) {
 		try {
@@ -149,10 +171,94 @@ public class User {
 			if (rs.next()) {
 				return rs;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			System.out.println(exception);
 		}
 		return null;
+	}
+
+	// Get user info and store it in list
+	public static List<User> getUserInformation(int userid) {
+		// Define list
+		List<User> userDetails = new ArrayList<>();
+		// Establish connection
+		try (Connection connection = getConnection();
+				// Prepare statement
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"select id, username, password, firstName, lastName from usertable where id = ?");) {
+			preparedStatement.setInt(1, userid);
+			// Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+				userDetails.add(new User(id, username, password, firstName, lastName));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return userDetails;
+	}
+
+	// Get info to pass to edit page
+	public static User getUserInformationEditPage(int userid) {
+		User existingUser = new User(userid, "", "", "", "");
+		// Establish a Connection
+		try (Connection connection = getConnection();
+				// Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"select id, username, password, firstName, lastName from usertable where id = ?");) {
+			preparedStatement.setInt(1, userid);
+			// Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			// Process the ResultSet object
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+				existingUser = new User(id, username, password, firstName, lastName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return existingUser;
+	}
+
+	// Update user
+	public static int updateUser(String username, String password, String firstName, String lastName, int id) {
+		int i = 0;
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(
+						"update usertable set username= ?, password =?, firstName =?, lastName =? where id = ?;");) {
+			statement.setString(1, username);
+			statement.setString(2, password);
+			statement.setString(3, firstName);
+			statement.setString(4, lastName);
+			statement.setInt(5, id);
+			i = statement.executeUpdate();
+			return i;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	// Delete user
+	public static int deleteUser(int userid) {
+		int i = 0;
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement("delete from usertable where id = ?;");) {
+			statement.setInt(1, userid);
+			i = statement.executeUpdate();
+			return i;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
 }

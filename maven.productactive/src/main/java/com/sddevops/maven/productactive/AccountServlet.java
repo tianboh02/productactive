@@ -26,11 +26,6 @@ public class AccountServlet extends HttpServlet {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/productactive";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "password";
-	// Step 2: Prepare list of SQL prepared statements to perform functions to our
-	// database
-	private static final String SELECT_USER_BY_ID = "select id, username, password, firstName, lastName from usertable where id = ?";
-	private static final String DELETE_USER_SQL = "delete from usertable where id = ?;";
-	private static final String UPDATE_USER_SQL = "update usertable set username= ?, password =?, firstName =?, lastName =? where id = ?;";
 
 	// Step 3: Implement the getConnection method which facilitates connection to
 	// the database via JDBC
@@ -96,28 +91,11 @@ public class AccountServlet extends HttpServlet {
 	// To connect to the database and retrieve users information
 	private void getUserDetails(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<User> userDetails = new ArrayList<>();
 		HttpSession session = request.getSession(true);
 		String idSession = (String) session.getAttribute("id");
-		try (Connection connection = getConnection();
-				// Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
-			preparedStatement.setInt(1, Integer.parseInt(idSession));
-
-			// Execute the query or update query
-			ResultSet rs = preparedStatement.executeQuery();
-			// Process the ResultSet object.
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				userDetails.add(new User(id, username, password, firstName, lastName));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+		
+		List<User> userDetails = User.getUserInformation(Integer.parseInt(idSession));
+		
 		// Set the user details list into the attribute to be pass to the account page
 		request.setAttribute("userid", idSession);
 		request.setAttribute("userDetails", userDetails);
@@ -132,26 +110,9 @@ public class AccountServlet extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String idSession = (String) session.getAttribute("id");
 		int id = Integer.parseInt(request.getParameter("id"));
-		User existingUser = new User(id, "", "", "", "");
-		// Establish a Connection
-		try (Connection connection = getConnection();
-				// Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
-			preparedStatement.setInt(1, id);
-			// Execute the query or update query
-			ResultSet rs = preparedStatement.executeQuery();
-			// Process the ResultSet object
-			while (rs.next()) {
-				id = rs.getInt("id");
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				existingUser = new User(id, username, password, firstName, lastName);
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+
+		User existingUser = User.getUserInformationEditPage(id);
+		
 		// Set existingUser to request and serve up the userEdit form
 		request.setAttribute("userid", idSession);
 		request.setAttribute("currentUser", existingUser);
@@ -166,16 +127,9 @@ public class AccountServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		// Step 2: Attempt connection with database and execute update user SQL query
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL);) {
-			statement.setString(1, username);
-			statement.setString(2, password);
-			statement.setString(3, firstName);
-			statement.setString(4, lastName);
-			statement.setInt(5, oriId);
-			int i = statement.executeUpdate();
-		}
+
+		User.updateUser(username, password, firstName, lastName, oriId);
+		
 		// Step 3: redirect back to UserServlet (note: remember to change the url to
 		// your project name)
 		response.sendRedirect("/maven.productactive/AccountServlet/userPage");
@@ -185,12 +139,9 @@ public class AccountServlet extends HttpServlet {
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		// Retrieve value from the request
 		int id = Integer.parseInt(request.getParameter("id"));
-		// Attempt connection with database and execute delete user SQL query
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_USER_SQL);) {
-			statement.setInt(1, id);
-			int i = statement.executeUpdate();
-		}
+
+		User.deleteUser(id);
+		
 		// Redirect back to home and clear attributes from session
 		HttpSession session = request.getSession(true);
 		session.removeAttribute("userid");
@@ -198,33 +149,4 @@ public class AccountServlet extends HttpServlet {
 		session.removeAttribute("id");
 		response.sendRedirect("/maven.productactive/HomePage.jsp");
 	}
-
-	// Update function for JUnit test
-	public User updateFunction(int id, String username, String password, String firstName, String lastName)
-			throws SQLException, IOException {
-		// Step 2: Attempt connection with database and execute update user SQL query
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_USER_SQL);) {
-			statement.setString(1, username);
-			statement.setString(2, password);
-			statement.setString(3, firstName);
-			statement.setString(4, lastName);
-			statement.setInt(5, id);
-			int i = statement.executeUpdate();
-		}
-		return null;
-
-	}
-
-	// Delete function for JUnit test
-	public User deleteFunction(int id) throws SQLException, IOException {
-		// Attempt connection with database and execute delete user SQL query
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_USER_SQL);) {
-			statement.setInt(1, id);
-			int i = statement.executeUpdate();
-		}
-		return null;
-	}
-
 }

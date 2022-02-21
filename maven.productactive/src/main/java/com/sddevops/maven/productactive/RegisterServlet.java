@@ -67,10 +67,6 @@ public class RegisterServlet extends HttpServlet {
 		String fn = request.getParameter("firstName");
 		String ln = request.getParameter("lastName");
 
-		// Step 3: attempt connection to database using JDBC, you can change the
-		// username and password
-		// accordingly using the phpMyAdmin > User Account dashboard
-
 		int i = User.registerUser(n, p, fn, ln);
 		
 		if (i > 0) {
@@ -92,51 +88,5 @@ public class RegisterServlet extends HttpServlet {
 		else {
 			request.getRequestDispatcher("/Register.jsp").forward(request, response);
 		}
-	}
-
-	// Register function for JUnit test
-	public boolean registerUser(String username, String password, String firstName, String lastName)
-			throws ServletException, IOException {
-		// Assign parameters
-		String n = username;
-		String p = password;
-		String fn = firstName;
-		String ln = lastName;
-
-		// Database connection
-		try {
-			int id = 1;
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productactive", "root",
-					"password");
-			// Execute SQL queries
-			PreparedStatement userIDAIStatement = con.prepareStatement("select max(id) from usertable");
-			ResultSet rs = userIDAIStatement.executeQuery();
-
-			if (rs.next()) {
-				id = rs.getInt(1);
-				id++;
-
-				PreparedStatement ps = con.prepareStatement("insert into usertable values(?,?,?,?,?)");
-				// Step 5: parse in the data retrieved from the web form request into the
-				// prepared statement
-				// accordingly
-				ps.setLong(1, id);
-				ps.setString(2, n);
-				ps.setString(3, p);
-				ps.setString(4, fn);
-				ps.setString(5, ln);
-				// Step 6: perform the query on the database using the prepared statement
-				int i = ps.executeUpdate();
-				if (i > 0) {
-					return true;
-				}
-			}
-		}
-		// Catch for error
-		catch (Exception exception) {
-			System.out.println(exception);
-		}
-		return false;
 	}
 }
