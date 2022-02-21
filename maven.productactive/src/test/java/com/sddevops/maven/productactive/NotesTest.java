@@ -11,13 +11,10 @@ import org.testng.annotations.AfterTest;
 public class NotesTest {
   @Test
   public void f() throws InterruptedException {
-	// define the chrome driver
+	  
 	System. setProperty("webdriver.chrome.driver", "C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
-	// define the drive instance
+	
 	WebDriver driver = new ChromeDriver();
-	Dimension d = new Dimension(1382,744); 
-	//Resize the current window to the given dimension
-	driver.manage().window().setSize(d); 
 	
 	driver.get ("http://localhost:8080/maven.productactive/HomeServlet");
 	
