@@ -19,7 +19,7 @@ public class NotesTest {
 	//Resize the current window to the given dimension
 	driver.manage().window().setSize(d); 
 	
-	driver.get ("http://localhost:8090/maven.productactive/HomeServlet");
+	driver.get ("http://localhost:8080/maven.productactive/HomeServlet");
 	
 	driver.findElement(By.linkText ("Login")) .click();
 	Thread.sleep(2000);
@@ -46,6 +46,7 @@ public class NotesTest {
 	
 	driver.findElement(By.xpath("//a[@href='delete?id=6']")).click();
 	
+	driver.quit();
   }
   @BeforeTest
   public void beforeTest() {
