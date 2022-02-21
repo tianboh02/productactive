@@ -88,9 +88,9 @@ value='${deadline.title}' />" class="form-control"
 					<label> Deadline</label> <input type="datetime-local"
 						value="<c:out
 value='${deadline.deadline}' />"
-						class="form-control" name="deadline">
+						class="form-control" name="deadline" id="deadline">
 				</fieldset>
-				<button type="submit" class="btn btn-success">Save</button>
+				<button type="submit" name="save" id="save" class="btn btn-success">Save</button>
 				</form>
 			</div>
 		</div>
