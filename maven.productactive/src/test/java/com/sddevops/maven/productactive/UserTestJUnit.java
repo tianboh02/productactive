@@ -33,6 +33,17 @@ class UserTestJUnit {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	
+	/**
+	 * Test method for {@link com.sddevops.maven.productactive.User#checkUsername(java.lang.String)}.
+	 */
+	@Test
+	void testCheckUsername() {
+		// Act
+		boolean userExists = User.checkUsername("notExistingUser");
+		// Assert
+		assertFalse(userExists == true);
+	}
 
 	/**
 	 * Test method for {@link com.sddevops.maven.productactive.User#registerUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.

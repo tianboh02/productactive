@@ -67,11 +67,20 @@ public class RegisterServlet extends HttpServlet {
 		String fn = request.getParameter("firstName");
 		String ln = request.getParameter("lastName");
 
-		int i = User.registerUser(n, p, fn, ln);
-		
-		if (i > 0) {
-			response.sendRedirect("/maven.productactive/LoginServlet");
+		boolean userExist = User.checkUsername(n);
+		System.out.println(userExist);
+		if (userExist == true) {
+			System.out.println("Username already exists.");
+			request.getRequestDispatcher("/Register.jsp").forward(request, response);
+
+		} else if (userExist == false) {
+			int i = User.registerUser(n, p, fn, ln);
+			if (i > 0) {
+				response.sendRedirect("/maven.productactive/LoginServlet");
+				System.out.println("User created.");
+			}
 		}
+
 	}
 
 	// Check if user is logged in

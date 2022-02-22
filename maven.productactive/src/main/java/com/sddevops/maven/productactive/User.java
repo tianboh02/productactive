@@ -126,6 +126,27 @@ public class User {
 		return connection;
 	}
 
+	// To check if username already exists.
+	public static boolean checkUsername(String username) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productactive", "root",
+					"password");
+			PreparedStatement ps = con.prepareStatement("select username from usertable where username=?");
+			ps.setString(1, username);
+			ResultSet usernameExist = ps.executeQuery();
+			if (usernameExist.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (Exception exception) {
+			System.out.println(exception);
+		}
+		return false;
+	}
+
 	// Register user
 	public static int registerUser(String username, String password, String firstName, String lastName) {
 		int i = 0;

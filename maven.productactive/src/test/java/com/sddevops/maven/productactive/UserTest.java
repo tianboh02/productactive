@@ -13,8 +13,27 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
 public class UserTest {
-  @Test
-  public void registerUser() {
+	@Test
+	public void checkDupeUsername() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
+		// define the drive instance
+		WebDriver driver = new ChromeDriver();
+		// navigate the browser to this URL
+		driver.get("http://localhost:8080/maven.productactive/");
+		// browser look for link with text value "Register"
+		driver.findElement(By.linkText("Register")).click();
+		// browser to look at input name and enter value
+		driver.findElement(By.name("username")).sendKeys("a");
+		driver.findElement(By.name("password")).sendKeys("b");
+		driver.findElement(By.name("firstName")).sendKeys("d");
+		driver.findElement(By.name("lastName")).sendKeys("c");
+		WebElement registerButton = driver.findElement(By.className("registerButton"));
+		registerButton.submit();
+		// Quit driver
+		driver.quit();
+	}
+	@Test(dependsOnMethods = { "checkDupeUsername" })
+	public void registerUser() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
 		// define the drive instance
 		WebDriver driver = new ChromeDriver();
@@ -31,10 +50,10 @@ public class UserTest {
 		registerButton.submit();
 		// Quit driver
 		driver.quit();
-  }
-  
-  @Test (dependsOnMethods= {"registerUser"})
-  public void loginUser() {
+	}
+
+	@Test(dependsOnMethods = { "registerUser" })
+	public void loginUser() {
 		// Define the Chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
 		// Define the drive instance
@@ -51,10 +70,10 @@ public class UserTest {
 		loginButton.submit();
 		// Quit driver
 		driver.quit();
-  }
-  
- @Test (dependsOnMethods= {"loginUser"})
-  public void updateUser() {
+	}
+
+	@Test(dependsOnMethods = { "loginUser" })
+	public void updateUser() {
 		// Define the Chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
 		// Define the drive instance
@@ -79,10 +98,10 @@ public class UserTest {
 		driver.findElement(By.className("updateButton")).click();
 		// Quit driver
 		driver.quit();
-  }
-  
-  @Test (dependsOnMethods= {"updateUser"})
-  public void deleteUser() {
+	}
+
+	@Test(dependsOnMethods = { "updateUser" })
+	public void deleteUser() {
 		// Define the Chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
 		// Define the drive instance
@@ -100,14 +119,14 @@ public class UserTest {
 		driver.findElement(By.className("deleteButton")).click();
 		// Quit driver
 		driver.quit();
-  }
-  
-  @BeforeTest
-  public void beforeTest() {
-  }
+	}
 
-  @AfterTest
-  public void afterTest() {
-  }
+	@BeforeTest
+	public void beforeTest() {
+	}
+
+	@AfterTest
+	public void afterTest() {
+	}
 
 }
