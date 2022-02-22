@@ -52,7 +52,7 @@ public class UserTest {
 		driver.quit();
 	}
 
-	@Test(dependsOnMethods = { "registerUser" })
+	@Test(dependsOnMethods = { "checkDupeUsername", "registerUser" })
 	public void loginUser() {
 		// Define the Chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
@@ -72,7 +72,7 @@ public class UserTest {
 		driver.quit();
 	}
 
-	@Test(dependsOnMethods = { "loginUser" })
+	@Test(dependsOnMethods = { "checkDupeUsername", "registerUser", "loginUser" })
 	public void updateUser() {
 		// Define the Chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
@@ -100,7 +100,7 @@ public class UserTest {
 		driver.quit();
 	}
 
-	@Test(dependsOnMethods = { "updateUser" })
+	@Test(dependsOnMethods = { "checkDupeUsername", "registerUser", "loginUser", "updateUser" })
 	public void deleteUser() {
 		// Define the Chrome driver
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\chromedriver.exe");
