@@ -30,6 +30,10 @@ pipeline {
        }
    }
    post{
+   	   always{
+   	   	   bat "cd maven.productactive"
+   	       junit '**/target/surefire-reports/TEST-*.xml'
+   	   }
        failure{
            mail body: """Dear Admin,
 
