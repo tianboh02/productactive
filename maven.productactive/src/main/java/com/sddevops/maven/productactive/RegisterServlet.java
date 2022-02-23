@@ -67,12 +67,15 @@ public class RegisterServlet extends HttpServlet {
 		String fn = request.getParameter("firstName");
 		String ln = request.getParameter("lastName");
 
+		// Check username if it exists
 		boolean userExist = User.checkUsername(n);
-		System.out.println(userExist);
+		
+		// If username already exists
 		if (userExist == true) {
 			System.out.println("Username already exists.");
 			request.getRequestDispatcher("/Register.jsp").forward(request, response);
 
+		// If username does not exist
 		} else if (userExist == false) {
 			int i = User.registerUser(n, p, fn, ln);
 			if (i > 0) {
