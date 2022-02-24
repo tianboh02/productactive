@@ -3,15 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.sddevops.maven.productactive.DeadlineSeleniumTest">
+      <class name="com.sddevops.maven.productactive.exampleJUnitTest">
         <methods>
-          <include name="deleteDeadline"/>
-          <include name="addDeadline"/>
-          <include name="beforeTest"/>
-          <include name="afterTest"/>
-          <include name="editDeadline"/>
+          <include name="testDeleteActivityLog"/>
         </methods>
-      </class> <!-- com.sddevops.maven.productactive.DeadlineSeleniumTest -->
+      </class> <!-- com.sddevops.maven.productactive.exampleJUnitTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
