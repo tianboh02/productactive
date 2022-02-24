@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -83,7 +82,6 @@ class UserTestJUnit {
 	 * Test method for {@link com.sddevops.maven.productactive.User#getUserInformationEditPage(int)}.
 	 */
 	@Test
-	@Order(4)
 	void testGetUserInformationEditPage() {
 		// Act
 		User userInformation = User.getUserInformationEditPage(1);
