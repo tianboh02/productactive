@@ -35,13 +35,13 @@ public class NotesTest {
 	driver.findElement(By.className("btn-success")).submit();
 	Thread.sleep(2000);
 	
-	driver.findElement(By.xpath("//a[@href='edit?id=6']")).click();
+	driver.findElement(By.xpath("//a[@href='edit?id=7']")).click();
 	driver.findElement(By.name("title")).sendKeys(" (Edited)");
 	driver.findElement(By.name("content")).sendKeys(" (Edited)");
 	driver.findElement(By.className("btn-success")).submit();
 	Thread.sleep(2000);
 	
-	driver.findElement(By.xpath("//a[@href='delete?id=6']")).click();
+	driver.findElement(By.xpath("//a[@href='delete?id=7']")).click();
 	Thread.sleep(2000);
 	
 	driver.quit();
