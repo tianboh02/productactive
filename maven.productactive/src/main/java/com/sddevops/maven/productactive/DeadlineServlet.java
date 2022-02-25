@@ -174,7 +174,7 @@ public class DeadlineServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String strDeadline = request.getParameter("deadline");
 
-		int i = Deadline.CreateDeadline(userFK, title,strDeadline);
+		int i = Deadline.createDeadline(userFK, title,strDeadline);
 		
 		if (i > 0){
 			response.sendRedirect("/maven.productactive/DeadlineServlet/dashboard");

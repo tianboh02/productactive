@@ -41,7 +41,7 @@ public class DeadlineSeleniumTest {
 	  
 	  driver.findElement(By.linkText ("Add New Deadlines")) .click();
 	  
-	  driver.findElement(By.name("title")).sendKeys("DevOps");
+	  driver.findElement(By.name("title")).sendKeys("Homework");
 
 	  WebElement dateBox = driver.findElement(By.xpath("//*[@name=\"deadline\"]"));
 
@@ -75,7 +75,7 @@ public class DeadlineSeleniumTest {
 		  driver.findElement(By.linkText ("Deadlines")) .click();
 		  
 
-		  driver.findElement(By.xpath("//td[contains(text(),'DevOps')]/following-sibling::td//a[contains(text(),'Edit')]")).click();
+		  driver.findElement(By.xpath("//td[contains(text(),'Homework')]/following-sibling::td//a[contains(text(),'Edit')]")).click();
 		  
 		  WebElement title = driver.findElement(By.name("title"));
 		 
@@ -83,7 +83,7 @@ public class DeadlineSeleniumTest {
 		  
 		  title.clear();
 		  
-		  title.sendKeys("DevOps Submission");
+		  title.sendKeys("Homework submission");
 		  dateBox.sendKeys("11112022");
 		  dateBox.sendKeys(Keys.TAB);
 		  dateBox.sendKeys("0900PM");
@@ -112,7 +112,7 @@ public class DeadlineSeleniumTest {
 	  
 	  driver.findElement(By.linkText ("Deadlines")) .click();
 	  
-	  driver.findElement(By.xpath("//td[contains(text(),'DevOps Submission')]/following-sibling::td//a[contains(text(),'Delete')]")).click();
+	  driver.findElement(By.xpath("//td[contains(text(),'Homework submission')]/following-sibling::td//a[contains(text(),'Delete')]")).click();
 	  
 	  driver.quit();
   }

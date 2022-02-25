@@ -156,7 +156,7 @@ public class Deadline {
 	}
 	
 	
-	public static int CreateDeadline(int userFK, String title, String strDeadline) {
+	public static int createDeadline(int userFK, String title, String strDeadline) {
 		
 		int i = 0;
 		
